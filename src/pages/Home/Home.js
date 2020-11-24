@@ -1,9 +1,11 @@
 import userEvent from "@testing-library/user-event";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups } from "../../store/group/actions";
 import { selectGroups } from "../../store/group/selectors";
+import { selectUser } from "../../store/user/selectors";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -12,7 +14,8 @@ export default function Home() {
   }, [dispatch]);
 
   const group = useSelector(selectGroups);
-  console.log("What is group", group);
+  const user = useSelector(selectUser);
+
   return (
     <div>
       <h2>Browse groups</h2>
@@ -27,7 +30,13 @@ export default function Home() {
               maxSize={item.maxUsers}
               tags={item.tags.map((i) => i.name)}
             />
-            <button>Join group</button>
+            {user.id ? (
+              <button>Join group</button>
+            ) : (
+              <Link to={`/login`}>
+                <button>Please login to join this group</button>{" "}
+              </Link>
+            )}
           </div>
         );
       })}
