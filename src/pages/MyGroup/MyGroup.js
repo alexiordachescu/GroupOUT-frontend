@@ -1,11 +1,17 @@
 import React, { useEffect } from "react";
-import { fetchAdminGroups } from "../../store/userGroups/actions";
+import {
+  fetchAdminGroups,
+  fetchMemberGroups,
+} from "../../store/userGroups/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function MyGroup() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchAdminGroups());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchMemberGroups());
   }, [dispatch]);
 
   return (
