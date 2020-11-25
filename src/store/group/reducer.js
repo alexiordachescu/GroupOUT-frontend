@@ -22,5 +22,3 @@ export default (state = initialState, action) => {
       return state;
   }
 };
-
-// return { ...state, groups: [...state.groups, action.payload] };
