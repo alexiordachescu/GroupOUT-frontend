@@ -30,8 +30,10 @@ export default function Home() {
               maxSize={item.maxUsers}
               tags={item.tags.map((i) => i.name)}
             />
-            {user.id ? (
+            {user.id & !item.member.map((i) => i.id).includes(user.id) ? (
               <button>Join group</button>
+            ) : item.member.map((i) => i.id).includes(user.id) ? (
+              <p style={{ fontWeight: "bold" }}>You're already a member!</p>
             ) : (
               <Link to={`/login`}>
                 <button>Please login to join this group</button>{" "}
