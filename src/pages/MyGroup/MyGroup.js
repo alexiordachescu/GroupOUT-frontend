@@ -9,6 +9,7 @@ import {
   selectAdminGroups,
   selectMemberGroups,
 } from "../../store/userGroups/selectors";
+import { Link } from "react-router-dom";
 
 export default function MyGroup() {
   const dispatch = useDispatch();
@@ -42,7 +43,9 @@ export default function MyGroup() {
                 maxSize={item.maxUsers}
                 tags={item.tags.map((i) => i.name)}
               />
-              <button>Show details</button>
+              <Link to={`/group/${item.id}`}>
+                <button>Show details</button>{" "}
+              </Link>
             </div>
           );
         })
@@ -62,8 +65,10 @@ export default function MyGroup() {
                   size={item.member.length}
                   maxSize={item.maxUsers}
                   tags={item.tags.map((i) => i.name)}
-                />
-                <button>Show details</button>
+                />{" "}
+                <Link to={`/group/${item.id}`}>
+                  <button>Show details</button>
+                </Link>
               </div>
             );
           })

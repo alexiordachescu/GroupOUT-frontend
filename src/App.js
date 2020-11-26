@@ -5,6 +5,7 @@ import Signup from "./pages/Signup/Signup";
 import Home from "./pages/Home/Home";
 import Navigation from "./components/Navigation";
 import MyGroup from "./pages/MyGroup/MyGroup";
+import GroupDetails from "./pages/GroupDetails/GroupDetails";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <Switch>
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={Home} />
         <Route path="/mygroups" component={MyGroup} />
+        <Route path="/group/:id" component={GroupDetails} />
+        <Route exact path="/" component={Home} />
       </Switch>
     </div>
   );
