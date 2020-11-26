@@ -36,3 +36,20 @@ export const addCommentSuccess = (response) => ({
   type: "ADD-COMMENT-SUCCESS",
   payload: response,
 });
+
+export const deleteUser = (id, groupId) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    const response = await Axios.delete(`${apiUrl}/groups/user/${id}/remove`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { groupId },
+    });
+
+    dispatch(deleteUserSuccess(response.data.updatedGroup));
+  };
+};
+
+export const deleteUserSuccess = (response) => ({
+  type: "DELETE-USER-SUCCESS",
+  payload: response,
+});

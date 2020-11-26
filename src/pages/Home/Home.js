@@ -14,7 +14,6 @@ export default function Home() {
   }, [dispatch]);
 
   const onJoinGroup = (id) => {
-    console.log(id);
     dispatch(joinGroup(id));
   };
   const group = useSelector(selectGroups);

@@ -8,6 +8,8 @@ export default (state = initialState, action) => {
       return { groupInfo: action.payload };
     case "ADD-COMMENT-SUCCESS":
       return { groupInfo: action.payload };
+    case "DELETE-USER-SUCCESS":
+      return { groupInfo: action.payload };
     default:
       return state;
   }

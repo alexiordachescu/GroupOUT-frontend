@@ -9,7 +9,8 @@ import {
   selectAdminGroups,
   selectMemberGroups,
 } from "../../store/userGroups/selectors";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { selectUser } from "../../store/user/selectors";
 
 export default function MyGroup() {
   const dispatch = useDispatch();
@@ -22,6 +23,12 @@ export default function MyGroup() {
 
   const admin = useSelector(selectAdminGroups);
   const member = useSelector(selectMemberGroups);
+  const { token } = useSelector(selectUser);
+
+  const history = useHistory();
+  if (token === null) {
+    history.push("/");
+  }
 
   return (
     <div>

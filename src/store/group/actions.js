@@ -20,7 +20,7 @@ export function groupsFetched(groups) {
 export const joinGroup = (id) => {
   return async (dispatch, getState) => {
     const { token } = selectUser(getState());
-    console.log("here i am", token);
+
     const response = await axios.post(
       `${apiUrl}/browse/${id}/join`,
       {},
