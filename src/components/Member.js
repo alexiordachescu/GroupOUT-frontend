@@ -4,7 +4,9 @@ export default function Member(props) {
   return (
     <div>
       <h3>{props.firstName}</h3>
-      <p>{props.description}</p>
+      <p>
+        {props.description} {props.image}
+      </p>
     </div>
   );
 }
