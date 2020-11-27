@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -74,6 +74,21 @@ export const login = (email, password) => {
       }
       dispatch(appDoneLoading());
     }
+  };
+};
+
+export const changeProfile = (firstName, lastName, description, email) => {
+  return async (dispatch, getState) => {
+    const { token, id } = selectUser(getState());
+    const response = await axios.patch(
+      `${apiUrl}/user/${id}`,
+      { firstName, lastName, description, email },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   };
 };
 

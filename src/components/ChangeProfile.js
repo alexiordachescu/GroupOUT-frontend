@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { selectUser } from "../store/user/selectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeProfile } from "../store/user/actions";
 
 export default function ChangeProfile() {
   const profile = useSelector(selectUser);
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState(profile.firstName);
   const [lastName, setLastName] = useState(profile.lastName);
   const [description, setDescription] = useState(profile.description);
   const [email, setEmail] = useState(profile.email);
   const [image, setImage] = useState(profile.imageUrl);
+
+  function saveChanges(event) {
+    event.preventDefault();
+
+    dispatch(changeProfile(firstName, lastName, description, email));
+  }
 
   return (
     <div>
@@ -59,7 +67,7 @@ export default function ChangeProfile() {
             ></input>
           </label>
         </div>
-        <button>Save changes</button>
+        <button onClick={saveChanges}>Save changes</button>
       </form>
     </div>
   );
