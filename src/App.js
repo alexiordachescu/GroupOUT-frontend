@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Navigation from "./components/Navigation";
 import MyGroup from "./pages/MyGroup/MyGroup";
 import GroupDetails from "./pages/GroupDetails/GroupDetails";
+import MyProfile from "./pages/MyProfile/MyProfile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route path="/mygroups" component={MyGroup} />
         <Route path="/group/:id" component={GroupDetails} />
+        <Route path="/profile" component={MyProfile} />
         <Route exact path="/" component={Home} />
       </Switch>
     </div>
