@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
 import Member from "../../components/Member";
+import ChangeProfile from "../../components/ChangeProfile";
 
 export default function MyProfile() {
   const user = useSelector(selectUser);
-  console.log(user);
+  const [edit, setEdit] = useState(false);
+
   return (
     <div>
       <h1>Welcome to your profile, {user.firstName}</h1>
@@ -17,6 +19,8 @@ export default function MyProfile() {
         description={user.description}
         email={user.email}
       />
+      <button onClick={() => setEdit(!edit)}>Make changes</button>
+      {edit ? <ChangeProfile /> : null}
     </div>
   );
 }
