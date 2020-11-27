@@ -77,12 +77,18 @@ export const login = (email, password) => {
   };
 };
 
-export const changeProfile = (firstName, lastName, description, email) => {
+export const changeProfile = (
+  firstName,
+  lastName,
+  description,
+  email,
+  imageUrl
+) => {
   return async (dispatch, getState) => {
     const { token, id } = selectUser(getState());
     const response = await axios.patch(
       `${apiUrl}/user/${id}`,
-      { firstName, lastName, description, email },
+      { firstName, lastName, description, email, imageUrl },
       {
         headers: {
           Authorization: `Bearer ${token}`,

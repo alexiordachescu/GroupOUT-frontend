@@ -3,7 +3,7 @@ import React from "react";
 export default function Member(props) {
   return (
     <div>
-      {props.image}
+      <img src={props.image} style={{ width: "40%", height: "10%" }}></img>
       <h3>
         {props.firstName} {props.lastName}
       </h3>

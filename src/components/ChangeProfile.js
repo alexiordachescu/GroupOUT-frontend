@@ -10,13 +10,30 @@ export default function ChangeProfile() {
   const [lastName, setLastName] = useState(profile.lastName);
   const [description, setDescription] = useState(profile.description);
   const [email, setEmail] = useState(profile.email);
-  const [image, setImage] = useState(profile.imageUrl);
+  const [imageUrl, setImageUrl] = useState("");
 
   function saveChanges(event) {
     event.preventDefault();
 
-    dispatch(changeProfile(firstName, lastName, description, email));
+    dispatch(changeProfile(firstName, lastName, description, email, imageUrl));
   }
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "s5ct6hmo");
+
+    const res = await fetch(
+      "	https://api.cloudinary.com/v1_1/dmqbltypk/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageUrl(file.secure_url);
+  };
 
   return (
     <div>
@@ -25,7 +42,7 @@ export default function ChangeProfile() {
         <div>
           <label>
             Change profile picture:
-            <input type="file"></input>
+            <input type="file" name="file" onChange={uploadImage} />
           </label>
         </div>
         <label>
