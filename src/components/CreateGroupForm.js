@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchTags } from "../store/tags/actions";
 
 export default function CreateGroupForm() {
   let today = new Date();
@@ -9,6 +11,11 @@ export default function CreateGroupForm() {
   const [tags, setTags] = useState(null);
   const [description, setDescription] = useState("");
   const [groupSize, setGroupSize] = useState(2);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, [dispatch]);
 
   function postGroup(event) {
     event.preventDefault();
