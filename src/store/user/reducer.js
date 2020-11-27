@@ -18,6 +18,8 @@ export default (state = initialState, action) => {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
+    case "CHANGE-PROFILE-SUCCESS":
+      return { ...state, ...action.payload };
 
     default:
       return state;

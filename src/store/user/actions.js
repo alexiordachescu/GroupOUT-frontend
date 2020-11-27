@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -76,6 +76,33 @@ export const login = (email, password) => {
     }
   };
 };
+
+export const changeProfile = (
+  firstName,
+  lastName,
+  description,
+  email,
+  imageUrl
+) => {
+  return async (dispatch, getState) => {
+    const { token, id } = selectUser(getState());
+    const response = await axios.patch(
+      `${apiUrl}/user/${id}`,
+      { firstName, lastName, description, email, imageUrl },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data.user);
+    dispatch(changeProfileSuccess(response.data.user));
+  };
+};
+export const changeProfileSuccess = (response) => ({
+  type: "CHANGE-PROFILE-SUCCESS",
+  payload: response,
+});
 
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
