@@ -5,11 +5,11 @@ export const fetchTags = () => {
   return async (dispatch, getState) => {
     const response = await Axios.get(`${apiUrl}/tags`);
 
-    dispatch(groupsFetched(response.data));
+    dispatch(tagsFetched(response.data));
   };
 };
 
-export function groupsFetched(groups) {
+export function tagsFetched(groups) {
   return {
     type: "TAGS_FETCH_SUCCESS",
     payload: groups,

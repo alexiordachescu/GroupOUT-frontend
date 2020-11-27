@@ -95,7 +95,7 @@ export const changeProfile = (
         },
       }
     );
-    console.log(response.data.user);
+
     dispatch(changeProfileSuccess(response.data.user));
   };
 };

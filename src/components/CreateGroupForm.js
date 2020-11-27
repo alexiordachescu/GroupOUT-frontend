@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createGroup } from "../store/group/actions";
 import { fetchTags } from "../store/tags/actions";
+import { selectTags } from "../store/tags/selectors";
 
 export default function CreateGroupForm() {
+  const tagsList = useSelector(selectTags);
   let today = new Date();
   const date2 =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
   const [imageUrl, setImageUrl] = useState("");
   const [date, setDate] = useState(date2);
-  const [tags, setTags] = useState(null);
   const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const [groupSize, setGroupSize] = useState(2);
 
   const dispatch = useDispatch();
@@ -19,6 +22,9 @@ export default function CreateGroupForm() {
 
   function postGroup(event) {
     event.preventDefault();
+    console.log("description", description);
+    console.log("tags", tags);
+    dispatch(createGroup(imageUrl, date, description, tags, groupSize));
   }
 
   const uploadImage = async (e) => {
@@ -58,24 +64,27 @@ export default function CreateGroupForm() {
             ></input>
           </label>
           <div>
-            <label>
-              Relevant tags for your outing:
-              <select
-                value={tags}
-                onChange={(e) => setTags(e.target.value)}
-              ></select>
-            </label>
-          </div>
+            <label>Relevant tags for your outing: </label>
+            <select value={tags} onChange={(e) => setTags(e.target.value)}>
+              {tagsList.map((i) => {
+                return (
+                  <option key={i.id} value={i.id}>
+                    {i.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>{" "}
           <div>
             <label>
               Please write a short description of your group so other OUTers can
               better match you :
-              <textarea
+              <input
                 style={{ height: "200px" }}
-                form="userform"
+                type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-              ></textarea>
+              ></input>
             </label>
           </div>
           <div>

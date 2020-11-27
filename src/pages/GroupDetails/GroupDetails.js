@@ -39,7 +39,10 @@ export default function GroupDetails() {
   return (
     <div>
       <h1>Group details</h1>
-      <h4>Image: {groupDetails.imageUrl}</h4>
+      <img
+        src={groupDetails.imageUrl}
+        style={{ width: "40%", height: "10%" }}
+      ></img>
       <h4>Description</h4>
       {groupDetails.description}
       <h4>Members list:</h4>
@@ -65,7 +68,7 @@ export default function GroupDetails() {
 
       <h4>Discussion:</h4>
       <div style={{ borderStyle: "solid" }}>
-        {groupDetails.groupComments
+        {groupDetails.groupComments && groupDetails.groupComments.length > 0
           ? groupDetails.groupComments.map((item) => {
               return (
                 <Comment
