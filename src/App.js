@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import MyGroup from "./pages/MyGroup/MyGroup";
 import GroupDetails from "./pages/GroupDetails/GroupDetails";
 import MyProfile from "./pages/MyProfile/MyProfile";
+import CreateGroup from "./pages/CreateGroup/CreateGroup";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/mygroups" component={MyGroup} />
         <Route path="/group/:id" component={GroupDetails} />
         <Route path="/profile" component={MyProfile} />
+        <Route path="/creategroup" component={CreateGroup} />
         <Route exact path="/" component={Home} />
       </Switch>
     </div>

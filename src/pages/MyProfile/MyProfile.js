@@ -3,10 +3,16 @@ import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
 import Member from "../../components/Member";
 import ChangeProfile from "../../components/ChangeProfile";
+import { useHistory } from "react-router-dom";
 
 export default function MyProfile() {
   const user = useSelector(selectUser);
   const [edit, setEdit] = useState(false);
+  const { token } = useSelector(selectUser);
+  const history = useHistory();
+  if (token === null) {
+    history.push("/");
+  }
 
   return (
     <div>

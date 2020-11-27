@@ -33,6 +33,7 @@ export default function Home() {
               maxSize={item.maxUsers}
               tags={item.tags.map((i) => i.name)}
             />
+
             {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
               <button onClick={() => onJoinGroup(item.id)}>Join group</button>
             ) : item.member.map((i) => i.id).includes(user.id) ? (

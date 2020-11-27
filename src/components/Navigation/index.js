@@ -26,6 +26,7 @@ export default function Navigation() {
             <div>
               <NavbarItem path="/mygroups" linkText="My Groups" />{" "}
               <NavbarItem path="/profile" linkText="My Profile"></NavbarItem>
+              <NavbarItem path="/creategroup" linkText="Create new group" />
             </div>
           ) : null}
           {loginLogoutControls}

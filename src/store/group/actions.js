@@ -37,3 +37,23 @@ export const joinSuccess = (response) => ({
   type: "JOIN-SUCCESS",
   payload: response,
 });
+
+export const createGroup = (imageUrl, date, description, tags, groupSize) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    const response = await axios.post(
+      `${apiUrl}/browse/createGroup`,
+      { imageUrl, date, description, tags, groupSize },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response);
+  };
+};
+export const createGroupSuccess = (response) => ({
+  type: "CREATE-GROUP-SUCCESS",
+  payload: response,
+});
