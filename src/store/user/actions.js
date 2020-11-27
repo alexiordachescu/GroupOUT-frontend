@@ -89,8 +89,14 @@ export const changeProfile = (firstName, lastName, description, email) => {
         },
       }
     );
+    console.log(response.data.user);
+    dispatch(changeProfileSuccess(response.data.user));
   };
 };
+export const changeProfileSuccess = (response) => ({
+  type: "CHANGE-PROFILE-SUCCESS",
+  payload: response,
+});
 
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
