@@ -27,6 +27,7 @@ export default function Home() {
           <div>
             <Group
               key={item.id}
+              image={item.imageUrl}
               description={item.description}
               date={item.date}
               size={item.member.length}
