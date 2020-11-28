@@ -48,7 +48,7 @@ export default function GroupDetails() {
 
   const useStyles = makeStyles({
     root: {
-      backgroundColor: "#8EE4AF",
+      backgroundColor: "#379683",
       marginTop: 10,
     },
     spacing: {

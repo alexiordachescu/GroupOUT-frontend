@@ -6,6 +6,8 @@ import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
 import { selectGroups } from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -22,31 +24,55 @@ export default function Home() {
   return (
     <div>
       <h2>Browse groups</h2>
-      {group.map((item) => {
-        return (
-          <div>
-            <Group
-              key={item.id}
-              image={item.imageUrl}
-              description={item.description}
-              date={item.date}
-              size={item.member.length}
-              maxSize={item.maxUsers}
-              tags={item.tags.map((i) => i.name)}
-            />
+      <Grid container>
+        <Grid item xs={2}>
+          <h2>Filters</h2>
+          <p>Element</p>
+          <p>Element</p>
+          <p>Element</p>
+          <p>Element</p>
+          <p>Element</p>
+          <p>Element</p>
+        </Grid>
 
-            {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
-              <button onClick={() => onJoinGroup(item.id)}>Join group</button>
-            ) : item.member.map((i) => i.id).includes(user.id) ? (
-              <p style={{ fontWeight: "bold" }}>You're already a member!</p>
-            ) : (
-              <Link to={`/login`}>
-                <button>Please login to join this group</button>{" "}
-              </Link>
-            )}
-          </div>
-        );
-      })}
+        <Grid item xs={10} container spacing={8}>
+          {group.map((item) => {
+            return (
+              <Grid item>
+                <Group
+                  key={item.id}
+                  image={item.imageUrl}
+                  description={item.description}
+                  date={item.date}
+                  size={item.member.length}
+                  maxSize={item.maxUsers}
+                  tags={item.tags.map((i) => i.name)}
+                />
+
+                {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onJoinGroup(item.id)}
+                  >
+                    Join group
+                  </Button>
+                ) : item.member.map((i) => i.id).includes(user.id) ? (
+                  <Button variant="contained" disabled>
+                    You're already a member!
+                  </Button>
+                ) : (
+                  <Link to={`/login`}>
+                    <Button variant="contained" color="primary">
+                      Please login to join this group
+                    </Button>{" "}
+                  </Link>
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Grid>
     </div>
   );
 }

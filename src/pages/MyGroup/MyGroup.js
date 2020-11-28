@@ -72,6 +72,7 @@ export default function MyGroup() {
                   date={item.date}
                   size={item.member.length}
                   maxSize={item.maxUsers}
+                  image={item.imageUrl}
                   tags={item.tags.map((i) => i.name)}
                 />{" "}
                 <Link to={`/group/${item.id}`}>
