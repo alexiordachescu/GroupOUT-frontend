@@ -46,7 +46,7 @@ export default function Home() {
                   date={item.date}
                   size={item.member.length}
                   maxSize={item.maxUsers}
-                  tags={item.tags.map((i) => i.name)}
+                  tags={item.tags}
                 />
 
                 {user.id && !item.member.map((i) => i.id).includes(user.id) ? (

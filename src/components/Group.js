@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import EventIcon from "@material-ui/icons/Event";
 import LocalOfferRoundedIcon from "@material-ui/icons/LocalOfferRounded";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles({
   root: {
@@ -22,31 +23,46 @@ const useStyles = makeStyles({
     marginBottom: "auto",
   },
   colorGreen: {
-    backgroundColor: "green",
+    backgroundColor: "#32CD32",
   },
   colorYellow: {
     backgroundColor: "yellow",
   },
-  collorDarkOrange: {
+  colorDarkOrange: {
     backgroundColor: "orange",
+  },
+  colorRed: {
+    backgroundColor: "red",
   },
 });
 
 export default function Group(props) {
   const classes = useStyles();
-  const fullLimit = props.size / props.maxSize;
+  const fullLimit = parseInt((props.size / props.maxSize) * 100);
   let color;
   switch (true) {
-    case fullLimit < 0.33:
+    case 0 < fullLimit && fullLimit < 32:
       color = "green";
       break;
-    case fullLimit > 0.66:
+    case 32 < fullLimit && fullLimit < 55:
+      color = "yellow";
+      break;
+    case 55 < fullLimit && fullLimit < 81:
       color = "darkOrange";
       break;
     default:
-      color = "yellow";
+      color = "red";
   }
-  console.log(color);
+
+  let colorMap = new Map([
+    ["green", classes.colorGreen],
+    ["yellow", classes.colorYellow],
+    ["darkOrange", classes.colorDarkOrange],
+    ["red", classes.colorRed],
+  ]);
+
+  let memberG = `Members: ${props.size} / ${props.maxSize}`;
+
   return (
     <Card className={classes.root}>
       <CardMedia image={props.image} className={classes.media} />
@@ -60,8 +76,8 @@ export default function Group(props) {
           {props.description}
         </Typography>{" "}
         <Grid container direction="row">
-          <Paper>
-            <Typography variant="caption">
+          <Paper variant="outlined">
+            <Typography variant="h6">
               <EventIcon fontSize="small" />
               {props.date}
             </Typography>
@@ -69,33 +85,13 @@ export default function Group(props) {
         </Grid>{" "}
         <Grid container direction="row" justify="space-between">
           <Grid item>
-            <Paper elevation={1}>
-              <Typography>
-                <LocalOfferRoundedIcon fontSize="small" />
-                {props.tags}
-              </Typography>
-            </Paper>
+            <LocalOfferRoundedIcon fontSize="small" />
+            {props.tags.map((i) => {
+              return <Chip label={i.name} variant="outlined" color="primary" />;
+            })}
           </Grid>
           <Grid item>
-            {color === "green" ? (
-              <Paper elevation={1} className={classes.colorGreen}>
-                <Typography variant="caption">
-                  Members: {props.size} / {props.maxSize}
-                </Typography>
-              </Paper>
-            ) : color === "yellow" ? (
-              <Paper elevation={1} className={classes.colorYellow}>
-                <Typography variant="caption">
-                  Members: {props.size} / {props.maxSize}
-                </Typography>{" "}
-              </Paper>
-            ) : (
-              <Paper elevation={1} className={classes.collorDarkOrange}>
-                <Typography variant="caption">
-                  Members: {props.size} / {props.maxSize}
-                </Typography>
-              </Paper>
-            )}
+            <Chip label={memberG} className={colorMap.get(color)} />
           </Grid>
         </Grid>
       </Grid>
