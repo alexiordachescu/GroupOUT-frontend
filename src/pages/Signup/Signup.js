@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "@material-ui/core/Button";
 import { signUp } from "../../store/user/actions";
 import { selectToken } from "../../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "@material-ui/core/Button";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -64,94 +65,122 @@ export default function SignUp() {
 
   const useStyles = makeStyles({
     input: { display: "none" },
-    root: { maxWidth: 800 },
+    root: { justifyContent: "center", width: "60%" },
+    typography: { fontSize: 25 },
   });
   const classes = useStyles();
 
   return (
-    <Container>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Signup</h1>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
+    <Grid
+      container
+      direction="column"
+      justify="space-between"
+      alignItems="center"
+    >
+      {" "}
+      <Grid item>
+        <Typography variant="overline" className={classes.typography}>
+          Sign Up
+        </Typography>
+      </Grid>
+      <Grid container spacing={2} className={classes.root}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="outlined"
             value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
             type="text"
-            placeholder="Enter name"
+            name="firstName"
+            label="First Name"
             required
+            fullWidth
+            onChange={(event) => setFirstName(event.target.value)}
           />
-        </Form.Group>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
             value={lastName}
             onChange={(event) => setLastName(event.target.value)}
             type="text"
-            placeholder="Enter name"
+            label="Last Name"
+            name="lastName"
+            variant="outlined"
+            fullWidth
             required
           />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             type="email"
-            placeholder="Enter email"
+            variant="outlined"
+            label="Enter email"
+            fullWidth
             required
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
             value={password}
+            variant="outlined"
             onChange={(event) => setPassword(event.target.value)}
             type="password"
-            placeholder="Password"
+            label="Password"
+            fullWidth
             required
           />
-        </Form.Group>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>Please write a short description of yourself</Form.Label>
-          <Form.Control
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             type="text"
-            placeholder="Enter name"
+            multiline
+            variant="outlined"
+            fullWidth
+            label="Please describe yourself in a few words"
             required
           />
-        </Form.Group>
-        <Typography variant="overline">
-          Choose a representative photo of yourself
-        </Typography>
-        <input
-          type="file"
-          name="file"
-          className={classes.input}
-          onChange={uploadImage}
-          id="contained-button-file"
-        />{" "}
-        <label htmlFor="contained-button-file">
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="overline">
+            Choose a representative photo of yourself
+          </Typography>
+          <input
+            type="file"
+            name="file"
+            className={classes.input}
+            onChange={uploadImage}
+            id="contained-button-file"
+          />{" "}
+          <label htmlFor="contained-button-file">
+            <Button
+              variant="contained"
+              color="primary"
+              component="span"
+              startIcon={<CloudUploadIcon />}
+            >
+              Upload
+            </Button>
+          </label>
+        </Grid>
+        <Grid item xs={12}>
           <Button
             variant="contained"
-            color="primary"
-            component="span"
-            startIcon={<CloudUploadIcon />}
+            type="submit"
+            onClick={submitForm}
+            endIcon={<ExitToAppIcon />}
           >
-            Upload
-          </Button>
-        </label>
-        <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up
           </Button>
-        </Form.Group>
-        <Link to="/login">Click here to log in</Link>
-      </Form>
-    </Container>
+        </Grid>
+        <Grid item xs={12}>
+          <Link to="/login">Click here to log in</Link>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
