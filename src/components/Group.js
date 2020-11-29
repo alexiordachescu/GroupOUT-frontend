@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     height: 150,
     marginBottom: "auto",
   },
+  paper: { backgroundColor: "rgba(130, 130, 130, 0.08)" },
   colorGreen: {
     backgroundColor: "#32CD32",
   },
@@ -82,17 +83,19 @@ export default function Group(props) {
             </Typography>
           </Paper>
         </Grid>{" "}
-        <Grid container direction="row" justify="space-between">
-          <Grid item>
-            <LocalOfferRoundedIcon fontSize="small" />
-            {props.tags.map((i) => {
-              return <Chip label={i.name} variant="outlined" color="primary" />;
-            })}
+        <Paper className={classes.paper}>
+          <Grid container direction="row" justify="space-between">
+            <Grid item>
+              <LocalOfferRoundedIcon fontSize="medium" />
+              {props.tags.map((i) => {
+                return <Chip label={i.name} color="secondary" />;
+              })}
+            </Grid>
+            <Grid item>
+              <Chip label={memberG} className={colorMap.get(color)} />
+            </Grid>
           </Grid>
-          <Grid item>
-            <Chip label={memberG} className={colorMap.get(color)} />
-          </Grid>
-        </Grid>
+        </Paper>
       </Grid>
     </Card>
   );
