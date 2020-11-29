@@ -6,11 +6,26 @@ import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
 import { selectGroups } from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
+import { selectTags } from "../../store/tags/selectors";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import { FormControlLabel } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import Paper from "@material-ui/core/Paper";
+import { fetchTags } from "../../store/tags/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTags());
   }, [dispatch]);
 
   const onJoinGroup = (id) => {
@@ -18,34 +33,95 @@ export default function Home() {
   };
   const group = useSelector(selectGroups);
   const user = useSelector(selectUser);
+  const filterTags = useSelector(selectTags);
+  console.log(filterTags);
+  // STYLING:
+
+  const useStyles = makeStyles({
+    typography: { fontSize: 25 },
+    spacing: { marginTop: 10 },
+  });
+  const classes = useStyles();
 
   return (
     <div>
-      <h2>Browse groups</h2>
-      {group.map((item) => {
-        return (
-          <div>
-            <Group
-              key={item.id}
-              description={item.description}
-              date={item.date}
-              size={item.member.length}
-              maxSize={item.maxUsers}
-              tags={item.tags.map((i) => i.name)}
-            />
+      <Typography
+        variant="overline"
+        color="inherit"
+        className={classes.typography}
+      >
+        Browse groups
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={2}>
+          <Paper elevation={3}>
+            <FormLabel>Tags</FormLabel>
+            <FormGroup>
+              {filterTags.map((tag) => {
+                return (
+                  <FormControlLabel control={<Checkbox />} label={tag.name} />
+                );
+              })}
+            </FormGroup>
+          </Paper>
 
-            {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
-              <button onClick={() => onJoinGroup(item.id)}>Join group</button>
-            ) : item.member.map((i) => i.id).includes(user.id) ? (
-              <p style={{ fontWeight: "bold" }}>You're already a member!</p>
-            ) : (
-              <Link to={`/login`}>
-                <button>Please login to join this group</button>{" "}
-              </Link>
-            )}
-          </div>
-        );
-      })}
+          <Paper elevation={3} className={classes.spacing}>
+            <FormLabel>Group size:</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 3 members"
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 4 members"
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 5 members"
+              />
+            </FormGroup>
+          </Paper>
+        </Grid>
+        <Divider orientation="vertical" flexItem />
+        <Grid item xs={10} container spacing={8}>
+          {group.map((item) => {
+            return (
+              <Grid item>
+                <Group
+                  key={item.id}
+                  image={item.imageUrl}
+                  description={item.description}
+                  date={item.date}
+                  size={item.member.length}
+                  maxSize={item.maxUsers}
+                  tags={item.tags}
+                />
+
+                {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onJoinGroup(item.id)}
+                  >
+                    Join group
+                  </Button>
+                ) : item.member.map((i) => i.id).includes(user.id) ? (
+                  <Button variant="contained" disabled>
+                    You're already a member!
+                  </Button>
+                ) : (
+                  <Link to={`/login`}>
+                    <Button variant="contained" color="primary">
+                      Please login to join this group
+                    </Button>{" "}
+                  </Link>
+                )}
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Grid>
     </div>
   );
 }
