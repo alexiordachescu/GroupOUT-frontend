@@ -70,6 +70,8 @@ export const login = (email, password) => {
         email,
         password,
       });
+      const { token } = response.data;
+      localStorage.setItem("token", token);
 
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
@@ -87,32 +89,14 @@ export const login = (email, password) => {
   };
 };
 
-export const changeProfile = (
-  firstName,
-  lastName,
-  description,
-  email,
-  imageUrl
-) => {
-  return async (dispatch, getState) => {
-    const { token, id } = selectUser(getState());
-    const response = await axios.patch(
-      `${apiUrl}/user/${id}`,
-      { firstName, lastName, description, email, imageUrl },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    dispatch(changeProfileSuccess(response.data.user));
-  };
+export const bootstrapLogin = () => async (dispatch, getState) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    dispatch(getUserWithStoredToken());
+  } else {
+    console.log("no token stored in localstorage");
+  }
 };
-export const changeProfileSuccess = (response) => ({
-  type: "CHANGE-PROFILE-SUCCESS",
-  payload: response,
-});
 
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
@@ -146,3 +130,29 @@ export const getUserWithStoredToken = () => {
     }
   };
 };
+export const changeProfile = (
+  firstName,
+  lastName,
+  description,
+  email,
+  imageUrl
+) => {
+  return async (dispatch, getState) => {
+    const { token, id } = selectUser(getState());
+    const response = await axios.patch(
+      `${apiUrl}/user/${id}`,
+      { firstName, lastName, description, email, imageUrl },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    dispatch(changeProfileSuccess(response.data.user));
+  };
+};
+export const changeProfileSuccess = (response) => ({
+  type: "CHANGE-PROFILE-SUCCESS",
+  payload: response,
+});

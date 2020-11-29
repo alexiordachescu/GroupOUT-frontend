@@ -8,8 +8,15 @@ import MyGroup from "./pages/MyGroup/MyGroup";
 import GroupDetails from "./pages/GroupDetails/GroupDetails";
 import MyProfile from "./pages/MyProfile/MyProfile";
 import CreateGroup from "./pages/CreateGroup/CreateGroup";
+import { bootstrapLogin } from "./store/user/actions";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(bootstrapLogin());
+  }, [dispatch]);
   return (
     <div className="App">
       <Navigation />
