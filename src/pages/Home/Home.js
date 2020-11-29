@@ -10,11 +10,22 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Divider from "@material-ui/core/Divider";
+import { selectTags } from "../../store/tags/selectors";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import { FormControlLabel } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
+import Paper from "@material-ui/core/Paper";
+import { fetchTags } from "../../store/tags/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchTags());
   }, [dispatch]);
 
   const onJoinGroup = (id) => {
@@ -22,11 +33,13 @@ export default function Home() {
   };
   const group = useSelector(selectGroups);
   const user = useSelector(selectUser);
-
+  const filterTags = useSelector(selectTags);
+  console.log(filterTags);
   // STYLING:
 
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
+    spacing: { marginTop: 10 },
   });
   const classes = useStyles();
 
@@ -39,17 +52,38 @@ export default function Home() {
       >
         Browse groups
       </Typography>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={2}>
-          <h2>Filters</h2>
-          <p>Element</p>
-          <p>Element</p>
-          <p>Element</p>
-          <p>Element</p>
-          <p>Element</p>
-          <p>Element</p>
-        </Grid>
+          <Paper elevation={3}>
+            <FormLabel>Tags</FormLabel>
+            <FormGroup>
+              {filterTags.map((tag) => {
+                return (
+                  <FormControlLabel control={<Checkbox />} label={tag.name} />
+                );
+              })}
+            </FormGroup>
+          </Paper>
 
+          <Paper elevation={3} className={classes.spacing}>
+            <FormLabel>Group size:</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 3 members"
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 4 members"
+              />
+              <FormControlLabel
+                control={<Checkbox />}
+                label="At least 5 members"
+              />
+            </FormGroup>
+          </Paper>
+        </Grid>
+        <Divider orientation="vertical" flexItem />
         <Grid item xs={10} container spacing={8}>
           {group.map((item) => {
             return (

@@ -76,10 +76,9 @@ export default function GroupDetails() {
               Group details:
             </Typography>
           </Grid>
-          <img
-            src={groupDetails.imageUrl}
-            style={{ width: "40%", height: "10%" }}
-          ></img>{" "}
+          <Grid item xs={12}>
+            <img src={groupDetails.imageUrl}></img>
+          </Grid>
         </Grid>
       </Paper>
       <Paper elevation={3} className={classes.root}>
