@@ -1,8 +1,18 @@
 .App {
   text-align: center;
-  background-color: #8ee4af;
-}
 
+  background-image: linear-gradient(
+    to right,
+    rgb(182, 244, 146),
+    rgb(51, 139, 147)
+  );
+}
+html,
+body,
+#root,
+.App {
+  min-height: 100vh;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
