@@ -1,10 +1,14 @@
 import userEvent from "@testing-library/user-event";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
-import { selectGroups } from "../../store/group/selectors";
+import {
+  selectGroups,
+  selectGroupsWithFilters,
+  selectGroupsWithTags,
+} from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -20,6 +24,9 @@ import Paper from "@material-ui/core/Paper";
 import { fetchTags } from "../../store/tags/actions";
 
 export default function Home() {
+  const group = useSelector(selectGroups);
+  const user = useSelector(selectUser);
+  const filterTags = useSelector(selectTags);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
@@ -31,10 +38,42 @@ export default function Home() {
   const onJoinGroup = (id) => {
     dispatch(joinGroup(id));
   };
-  const group = useSelector(selectGroups);
-  const user = useSelector(selectUser);
-  const filterTags = useSelector(selectTags);
-  console.log(filterTags);
+
+  const [filters, setFilters] = useState({
+    tags: [
+      "Walk",
+      "Dance",
+      "Music",
+      "Sports",
+      "Drinks",
+      "Photography",
+      "Coffee",
+      "Shopping",
+      "Cycling",
+      "Travel",
+      "Dating",
+      "Culture",
+    ],
+    groupSize: [3, 4, 5],
+  });
+
+  const groupsWithSelectedTags = useSelector(selectGroupsWithFilters(filters));
+
+  const tags = filterTags.map((i) => i.name);
+  const existingGroupsSize = group.map((i) => i.maxUsers);
+
+  const handleChange = (event) => {
+    let selectedTag = event.target.name;
+    const newList = tags.filter((i) => i == selectedTag);
+    setFilters({ tags: newList, groupSize: filters.groupSize });
+  };
+
+  const sizeFilter = (event) => {
+    const selectedSize = event.target.value;
+    const newList = existingGroupsSize.filter((i) => i >= selectedSize);
+    setFilters({ groupSize: newList, tags: filters.tags });
+  };
+
   // STYLING:
 
   const useStyles = makeStyles({
@@ -59,7 +98,12 @@ export default function Home() {
             <FormGroup>
               {filterTags.map((tag) => {
                 return (
-                  <FormControlLabel control={<Checkbox />} label={tag.name} />
+                  <FormControlLabel
+                    control={
+                      <Checkbox onChange={handleChange} name={tag.name} />
+                    }
+                    label={tag.name}
+                  />
                 );
               })}
             </FormGroup>
@@ -69,15 +113,15 @@ export default function Home() {
             <FormLabel>Group size:</FormLabel>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox onChange={sizeFilter} value={3} />}
                 label="At least 3 members"
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox onChange={sizeFilter} value={4} />}
                 label="At least 4 members"
               />
               <FormControlLabel
-                control={<Checkbox />}
+                control={<Checkbox onChange={sizeFilter} value={5} />}
                 label="At least 5 members"
               />
             </FormGroup>
@@ -85,7 +129,7 @@ export default function Home() {
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item xs={10} container spacing={8}>
-          {group.map((item) => {
+          {groupsWithSelectedTags.map((item) => {
             return (
               <Grid item>
                 <Group
