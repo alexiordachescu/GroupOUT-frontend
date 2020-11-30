@@ -44,13 +44,16 @@ export default function MyGroup() {
 
   return (
     <div>
-      <Typography
-        variant="overline"
-        color="inherit"
-        className={classes.typography}
-      >
-        Groups managed by me:
-      </Typography>
+      <Grid item xs={12}>
+        <Typography
+          variant="overline"
+          color="inherit"
+          className={classes.typography}
+        >
+          Groups managed by me:
+        </Typography>
+      </Grid>
+
       <Grid container>
         <Grid item xs={12} container spacing={5} justify="center">
           {admin.length === 0 ? (

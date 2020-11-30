@@ -7,7 +7,6 @@ import { fetchGroups, joinGroup } from "../../store/group/actions";
 import {
   selectGroups,
   selectGroupsWithFilters,
-  selectGroupsWithTags,
 } from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
 import Button from "@material-ui/core/Button";
@@ -91,6 +90,7 @@ export default function Home() {
       >
         Browse groups
       </Typography>
+
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Paper elevation={3}>
