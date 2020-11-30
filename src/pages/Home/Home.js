@@ -65,13 +65,13 @@ export default function Home() {
   const handleChange = (event) => {
     let selectedTag = event.target.name;
     const newList = tags.filter((i) => i == selectedTag);
-    setFilters({ tags: newList });
+    setFilters({ tags: newList, groupSize: filters.groupSize });
   };
 
   const sizeFilter = (event) => {
     const selectedSize = event.target.value;
     const newList = existingGroupsSize.filter((i) => i >= selectedSize);
-    setFilters({ groupSize: newList });
+    setFilters({ groupSize: newList, tags: filters.tags });
   };
 
   // STYLING:
