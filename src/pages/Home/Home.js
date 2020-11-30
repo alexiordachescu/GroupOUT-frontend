@@ -1,10 +1,14 @@
 import userEvent from "@testing-library/user-event";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
-import { selectGroups } from "../../store/group/selectors";
+import {
+  selectGroups,
+  selectGroupsWithFilters,
+  selectGroupsWithTags,
+} from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -31,10 +35,15 @@ export default function Home() {
   const onJoinGroup = (id) => {
     dispatch(joinGroup(id));
   };
+
+  const [tags, setTags] = useState({ tags: ["Sports"] });
+  console.log(tags);
+  const groupsWithSelectedTags = useSelector(selectGroupsWithFilters(tags));
+  console.log(groupsWithSelectedTags);
   const group = useSelector(selectGroups);
   const user = useSelector(selectUser);
   const filterTags = useSelector(selectTags);
-  console.log(filterTags);
+
   // STYLING:
 
   const useStyles = makeStyles({
