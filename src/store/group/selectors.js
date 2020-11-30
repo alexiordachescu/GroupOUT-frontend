@@ -19,8 +19,15 @@ export const selectGroupsWithFilters = (filters) => (state) => {
   }
 
   if (groupSize) {
-    // filter groups by group size
-    groups = groups.filter();
+    groups = groups.filter((group) => {
+      let doesGroupHaveRequestedSize = false;
+      groupSize.forEach((input) => {
+        if (group.maxUsers >= input) {
+          doesGroupHaveRequestedSize = true;
+        }
+      });
+      return doesGroupHaveRequestedSize;
+    });
   }
 
   return groups;
