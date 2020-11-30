@@ -20,19 +20,21 @@ const useStyles = makeStyles({
   container: {
     height: 150,
     marginBottom: "auto",
+    backgroundColor: "rgba(55,150,131,0.2)",
   },
+  typography: { fontSize: 12, fontWeight: "bold", marginTop: 3 },
   paper: { backgroundColor: "rgba(130, 130, 130, 0.08)" },
   colorGreen: {
-    backgroundColor: "#32CD32",
+    backgroundColor: "rgba(35,165,20,0.4)",
   },
   colorYellow: {
-    backgroundColor: "yellow",
+    backgroundColor: "rgba(241,231,103,0.4)",
   },
   colorDarkOrange: {
-    backgroundColor: "orange",
+    backgroundColor: "rgba(255,118,12,0.4)",
   },
   colorRed: {
-    backgroundColor: "red",
+    backgroundColor: "rgba(234,12,12,0.4)",
   },
 });
 
@@ -72,7 +74,11 @@ export default function Group(props) {
         justify="space-between"
         className={classes.container}
       >
-        <Typography variant="subtitle1" color="primary" paragraph="true">
+        <Typography
+          variant="overline"
+          color="initial"
+          className={classes.typography}
+        >
           {props.description}
         </Typography>{" "}
         <Grid container direction="row">

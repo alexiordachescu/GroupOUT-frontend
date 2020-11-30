@@ -1,11 +1,12 @@
 .App {
   text-align: center;
 
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     rgb(182, 244, 146),
     rgb(51, 139, 147)
-  );
+  ); */
+  background-image: url(./images/blue-snow.png);
 }
 html,
 body,
