@@ -39,41 +39,39 @@ export default function Home() {
   };
 
   const [filters, setFilters] = useState({
-    tags: [
-      "Walk",
-      "Dance",
-      "Music",
-      "Sports",
-      "Drinks",
-      "Photography",
-      "Coffee",
-      "Shopping",
-      "Cycling",
-      "Travel",
-      "Dating",
-      "Culture",
-    ],
-    groupSize: [3, 4, 5],
+    tags: [],
+    groupSize: [],
   });
-  // const [activatedFilters, setActivatedFilters] = useState(false);
+
   const groupsWithSelectedTags = useSelector(selectGroupsWithFilters(filters));
 
   const handleChange = (event) => {
-    const tags = filterTags.map((i) => i.name);
     let selectedTag = event.target.name;
-    console.log(selectedTag);
-    let newList = tags.filter((i) => {
-      return i.indexOf(selectedTag) !== -1;
+    let newList;
+    if (filters.tags.includes(selectedTag)) {
+      newList = filters.tags.filter((tag) => tag !== selectedTag);
+    } else {
+      newList = [...filters.tags, selectedTag];
+    }
+    setFilters({
+      ...filters,
+      tags: newList,
     });
-    setFilters({ tags: newList, groupSize: filters.groupSize });
-    // setActivatedFilters(!activatedFilters);
   };
 
   const sizeFilter = (event) => {
-    const existingGroupsSize = group.map((i) => i.maxUsers);
-    const selectedSize = event.target.value;
-    const newList = existingGroupsSize.filter((i) => i >= selectedSize);
-    setFilters({ groupSize: newList, tags: filters.tags });
+    let selectedSize = event.target.value;
+    let newList;
+    if (filters.groupSize.includes(selectedSize)) {
+      newList = filters.groupSize.filter((i) => i !== selectedSize);
+    } else {
+      newList = [...filters.groupSize, selectedSize];
+    }
+    console.log(newList);
+    setFilters({
+      ...filters,
+      groupSize: newList,
+    });
   };
 
   // STYLING:

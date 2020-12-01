@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGroup } from "../store/group/actions";
@@ -16,15 +17,19 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 export default function CreateGroupForm() {
   const tagsList = useSelector(selectTags);
-  let today = new Date();
-  const date2 =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  // let today = new Date();
+  const today = moment();
+  const date2 = today.format("yyyy-MM-DD");
+  // adjust 0 before single digit date
+  // const todayDateWithZero = ("0" + date_ob.getDate()).slice(-2);
+  // const date2 =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + todayDateWithZero;
   const [imageUrl, setImageUrl] = useState("");
   const [date, setDate] = useState(date2);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [groupSize, setGroupSize] = useState("");
-
+  console.log(date);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTags());
