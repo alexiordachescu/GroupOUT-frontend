@@ -150,6 +150,7 @@ export const changeProfile = (
     );
 
     dispatch(changeProfileSuccess(response.data.user));
+    console.log(response);
   };
 };
 export const changeProfileSuccess = (response) => ({

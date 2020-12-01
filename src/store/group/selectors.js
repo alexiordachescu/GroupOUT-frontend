@@ -1,4 +1,5 @@
 export const selectGroups = (state) => state.groupReducer.groups;
+export const selectCreateGroupMessage = (state) => state.groupReducer.message;
 
 export const selectGroupsWithFilters = (filters) => (state) => {
   const { tags, groupSize } = filters;
