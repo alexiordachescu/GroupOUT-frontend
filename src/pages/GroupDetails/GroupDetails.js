@@ -18,6 +18,8 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
+import CardMedia from "@material-ui/core/CardMedia";
+import Divider from "@material-ui/core/Divider";
 
 export default function GroupDetails() {
   const params = useParams();
@@ -63,6 +65,14 @@ export default function GroupDetails() {
       marginBottom: 100,
     },
     textBox: { width: "60%" },
+    comments: { marginTop: 3 },
+    image: {
+      width: "100%",
+      backgroundSize: "contain",
+      height: 550,
+      boxShadow:
+        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    },
   });
 
   const classes = useStyles();
@@ -76,8 +86,11 @@ export default function GroupDetails() {
               Group details:
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <img src={groupDetails.imageUrl}></img>
+          <Grid item xs={12} container justify="center">
+            <CardMedia
+              image={groupDetails.imageUrl}
+              className={classes.image}
+            />
           </Grid>
         </Grid>
       </Paper>
@@ -135,11 +148,15 @@ export default function GroupDetails() {
             {groupDetails.groupComments && groupDetails.groupComments.length > 0
               ? groupDetails.groupComments.map((item) => {
                   return (
-                    <Comment
-                      key={item.id}
-                      comment={item.comment}
-                      name={item.user.firstName}
-                    />
+                    <Grid item className={classes.comments}>
+                      <Comment
+                        key={item.id}
+                        comment={item.comment}
+                        name={item.user.firstName}
+                        date={item.createdAt}
+                      />
+                      <Divider />
+                    </Grid>
                   );
                 })
               : "Sorry, no comments yet!"}

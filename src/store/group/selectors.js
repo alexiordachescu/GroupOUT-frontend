@@ -5,9 +5,6 @@ export const selectGroupsWithFilters = (filters) => (state) => {
 
   let groups = [...state.groupReducer.groups];
 
-  console.log("WHAT IS TAGS", tags);
-  console.log("WHAT IS GROUPSIZE", groupSize);
-
   if (tags && tags.length > 0) {
     groups = groups.filter((group) => {
       let doesGroupHaveOneOfSelectedTags = false;

@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function MyGroup() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function MyGroup() {
               );
             })
           ) : (
-            "loading...."
+            <CircularProgress color="secondary" />
           )}
         </Grid>{" "}
         <Grid item xs={12}>
@@ -100,30 +101,32 @@ export default function MyGroup() {
           </Typography>
         </Grid>
         <Grid item container xs={12} spacing={5} justify="center">
-          {member
-            ? member.map((item) => {
-                return (
-                  <Grid item>
-                    <Group
-                      key={item.id}
-                      description={item.description}
-                      date={item.date}
-                      size={item.member.length}
-                      maxSize={item.maxUsers}
-                      image={item.imageUrl}
-                      tags={item.tags}
-                    />{" "}
-                    <Grid item className={classes.margin}>
-                      <Link to={`/group/${item.id}`}>
-                        <Button variant="contained" color="primary">
-                          Show details
-                        </Button>
-                      </Link>{" "}
-                    </Grid>
+          {member ? (
+            member.map((item) => {
+              return (
+                <Grid item>
+                  <Group
+                    key={item.id}
+                    description={item.description}
+                    date={item.date}
+                    size={item.member.length}
+                    maxSize={item.maxUsers}
+                    image={item.imageUrl}
+                    tags={item.tags}
+                  />{" "}
+                  <Grid item className={classes.margin}>
+                    <Link to={`/group/${item.id}`}>
+                      <Button variant="contained" color="primary">
+                        Show details
+                      </Button>
+                    </Link>{" "}
                   </Grid>
-                );
-              })
-            : "loading...."}
+                </Grid>
+              );
+            })
+          ) : (
+            <CircularProgress color="secondary" />
+          )}
         </Grid>
       </Grid>
     </div>
