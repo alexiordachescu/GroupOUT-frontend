@@ -8,11 +8,16 @@ import Grid from "@material-ui/core/Grid";
 import EventIcon from "@material-ui/icons/Event";
 import LocalOfferRoundedIcon from "@material-ui/icons/LocalOfferRounded";
 import Chip from "@material-ui/core/Chip";
+import { useState } from "react";
 
 const useStyles = makeStyles({
   root: {
     width: 500,
     height: 400,
+    transition: "transform 0.15s ease-in-out",
+  },
+  cardHovered: {
+    transform: "scale3d(1.05, 1.05, 1)",
   },
   media: {
     height: 250,
@@ -20,19 +25,21 @@ const useStyles = makeStyles({
   container: {
     height: 150,
     marginBottom: "auto",
+    backgroundColor: "rgba(110,107,198,0.4)",
   },
+  typography: { fontSize: 12, fontWeight: "bold", marginTop: 3 },
   paper: { backgroundColor: "rgba(130, 130, 130, 0.08)" },
   colorGreen: {
-    backgroundColor: "#32CD32",
+    backgroundColor: "rgba(35,165,20,0.4)",
   },
   colorYellow: {
-    backgroundColor: "yellow",
+    backgroundColor: "rgba(241,231,103,0.4)",
   },
   colorDarkOrange: {
-    backgroundColor: "orange",
+    backgroundColor: "rgba(255,118,12,0.4)",
   },
   colorRed: {
-    backgroundColor: "red",
+    backgroundColor: "rgba(234,12,12,0.4)",
   },
 });
 
@@ -60,11 +67,18 @@ export default function Group(props) {
     ["darkOrange", classes.colorDarkOrange],
     ["red", classes.colorRed],
   ]);
-
+  const [effect, setEffect] = useState({ shadow: 1, raised: false });
   let memberG = `Members: ${props.size} / ${props.maxSize}`;
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      classes={{ root: effect.raised ? classes.cardHovered : "" }}
+      onMouseOver={() => setEffect({ shadow: 3, raised: true })}
+      onMouseOut={() => setEffect({ raised: false, shadow: 1 })}
+      raised={effect.raised}
+      zdepth={effect.shadow}
+    >
       <CardMedia image={props.image} className={classes.media} />
       <Grid
         container
@@ -72,7 +86,11 @@ export default function Group(props) {
         justify="space-between"
         className={classes.container}
       >
-        <Typography variant="subtitle1" color="primary" paragraph="true">
+        <Typography
+          variant="overline"
+          color="initial"
+          className={classes.typography}
+        >
           {props.description}
         </Typography>{" "}
         <Grid container direction="row">

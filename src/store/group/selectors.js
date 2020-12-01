@@ -5,7 +5,7 @@ export const selectGroupsWithFilters = (filters) => (state) => {
 
   let groups = [...state.groupReducer.groups];
 
-  if (tags) {
+  if (tags && tags.length > 0) {
     groups = groups.filter((group) => {
       let doesGroupHaveOneOfSelectedTags = false;
       const groupTagNames = group.tags.map((t) => t.name);
@@ -18,7 +18,7 @@ export const selectGroupsWithFilters = (filters) => (state) => {
     });
   }
 
-  if (groupSize) {
+  if (groupSize && groupSize.length > 0) {
     groups = groups.filter((group) => {
       let doesGroupHaveRequestedSize = false;
       groupSize.forEach((input) => {

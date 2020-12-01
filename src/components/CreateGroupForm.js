@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGroup } from "../store/group/actions";
@@ -16,9 +17,10 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 export default function CreateGroupForm() {
   const tagsList = useSelector(selectTags);
-  let today = new Date();
-  const date2 =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  const today = moment();
+  const date2 = today.format("yyyy-MM-DD");
+
   const [imageUrl, setImageUrl] = useState("");
   const [date, setDate] = useState(date2);
   const [description, setDescription] = useState("");
@@ -32,8 +34,7 @@ export default function CreateGroupForm() {
 
   function postGroup(event) {
     event.preventDefault();
-    console.log("description", description);
-    console.log("tags", tags);
+
     dispatch(createGroup(imageUrl, date, description, tags, groupSize));
   }
 
@@ -126,7 +127,7 @@ export default function CreateGroupForm() {
               variant="outlined"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth required>
@@ -137,9 +138,6 @@ export default function CreateGroupForm() {
                 value={groupSize}
                 onChange={(e) => setGroupSize(e.target.value)}
               >
-                {/* <MenuItem value="">
-                  <em>None</em>{" "}
-                </MenuItem> */}
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
                 <MenuItem value={4}>4</MenuItem>

@@ -18,6 +18,8 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from "@material-ui/icons/Send";
 import TextField from "@material-ui/core/TextField";
+import CardMedia from "@material-ui/core/CardMedia";
+import Divider from "@material-ui/core/Divider";
 
 export default function GroupDetails() {
   const params = useParams();
@@ -48,7 +50,7 @@ export default function GroupDetails() {
 
   const useStyles = makeStyles({
     root: {
-      backgroundColor: "#379683",
+      backgroundColor: "rgba(97,196,176)",
       marginTop: 10,
     },
     spacing: {
@@ -60,9 +62,18 @@ export default function GroupDetails() {
       marginTop: "auto",
       marginLeft: "auto",
       marginRight: "auto",
-      marginBottom: 100,
+      marginBottom: 50,
     },
+    descriptionText: { fontSize: "2rem" },
     textBox: { width: "60%" },
+    comments: { marginTop: 3, fontSize: "1.2rem" },
+    image: {
+      width: "100%",
+      backgroundSize: "contain",
+      height: 550,
+      boxShadow:
+        "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    },
   });
 
   const classes = useStyles();
@@ -76,8 +87,11 @@ export default function GroupDetails() {
               Group details:
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <img src={groupDetails.imageUrl}></img>
+          <Grid item xs={12} container justify="center">
+            <CardMedia
+              image={groupDetails.imageUrl}
+              className={classes.image}
+            />
           </Grid>
         </Grid>
       </Paper>
@@ -88,7 +102,9 @@ export default function GroupDetails() {
               Group description
             </Typography>
           </Grid>
-          {groupDetails.description}
+          <Grid item className={classes.descriptionText}>
+            {groupDetails.description}
+          </Grid>
         </Grid>{" "}
       </Paper>
       <Paper elevation={3} className={classes.root}>
@@ -135,11 +151,15 @@ export default function GroupDetails() {
             {groupDetails.groupComments && groupDetails.groupComments.length > 0
               ? groupDetails.groupComments.map((item) => {
                   return (
-                    <Comment
-                      key={item.id}
-                      comment={item.comment}
-                      name={item.user.firstName}
-                    />
+                    <Grid item className={classes.comments}>
+                      <Comment
+                        key={item.id}
+                        comment={item.comment}
+                        name={item.user.firstName}
+                        date={item.createdAt}
+                      />
+                      <Divider />
+                    </Grid>
                   );
                 })
               : "Sorry, no comments yet!"}
@@ -154,15 +174,17 @@ export default function GroupDetails() {
               className={classes.textBox}
               onChange={(e) => setComment(e.target.value)}
             />
+          </Grid>{" "}
+          <Grid item xs={12}>
+            <Button
+              color="primary"
+              variant="contained"
+              endIcon={<SendIcon />}
+              onClick={addComment}
+            >
+              Add comment!
+            </Button>
           </Grid>
-          <Button
-            color="primary"
-            variant="contained"
-            endIcon={<SendIcon />}
-            onClick={addComment}
-          >
-            Add comment!
-          </Button>
         </Grid>{" "}
       </Paper>
     </Grid>

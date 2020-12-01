@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function MyGroup() {
   const dispatch = useDispatch();
@@ -32,25 +33,29 @@ export default function MyGroup() {
 
   const history = useHistory();
   if (token === null) {
-    history.push("/");
+    history.push("/explore");
   }
 
   // STYLING:
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
+    margin: { marginTop: 10 },
   });
 
   const classes = useStyles();
 
   return (
     <div>
-      <Typography
-        variant="overline"
-        color="inherit"
-        className={classes.typography}
-      >
-        Groups managed by me:
-      </Typography>
+      <Grid item xs={12}>
+        <Typography
+          variant="overline"
+          color="inherit"
+          className={classes.typography}
+        >
+          Groups managed by me:
+        </Typography>
+      </Grid>
+
       <Grid container>
         <Grid item xs={12} container spacing={5} justify="center">
           {admin.length === 0 ? (
@@ -71,16 +76,18 @@ export default function MyGroup() {
                     image={item.imageUrl}
                     tags={item.tags}
                   />
-                  <Link to={`/group/${item.id}`}>
-                    <Button variant="contained" color="primary">
-                      Show details
-                    </Button>
-                  </Link>
+                  <Grid item className={classes.margin}>
+                    <Link to={`/group/${item.id}`}>
+                      <Button variant="contained" color="primary">
+                        Show details
+                      </Button>
+                    </Link>
+                  </Grid>
                 </Grid>
               );
             })
           ) : (
-            "loading...."
+            <CircularProgress color="secondary" />
           )}
         </Grid>{" "}
         <Grid item xs={12}>
@@ -94,28 +101,32 @@ export default function MyGroup() {
           </Typography>
         </Grid>
         <Grid item container xs={12} spacing={5} justify="center">
-          {member
-            ? member.map((item) => {
-                return (
-                  <Grid item>
-                    <Group
-                      key={item.id}
-                      description={item.description}
-                      date={item.date}
-                      size={item.member.length}
-                      maxSize={item.maxUsers}
-                      image={item.imageUrl}
-                      tags={item.tags}
-                    />{" "}
+          {member ? (
+            member.map((item) => {
+              return (
+                <Grid item>
+                  <Group
+                    key={item.id}
+                    description={item.description}
+                    date={item.date}
+                    size={item.member.length}
+                    maxSize={item.maxUsers}
+                    image={item.imageUrl}
+                    tags={item.tags}
+                  />{" "}
+                  <Grid item className={classes.margin}>
                     <Link to={`/group/${item.id}`}>
                       <Button variant="contained" color="primary">
                         Show details
                       </Button>
-                    </Link>
+                    </Link>{" "}
                   </Grid>
-                );
-              })
-            : "loading...."}
+                </Grid>
+              );
+            })
+          ) : (
+            <CircularProgress color="secondary" />
+          )}
         </Grid>
       </Grid>
     </div>
