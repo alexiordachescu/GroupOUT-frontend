@@ -7,9 +7,10 @@ body,
 #root,
 .App {
   min-height: 100vh;
+  max-width: 100%;
 }
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

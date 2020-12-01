@@ -38,6 +38,7 @@ export default function MyGroup() {
   // STYLING:
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
+    margin: { marginTop: 10 },
   });
 
   const classes = useStyles();
@@ -74,11 +75,13 @@ export default function MyGroup() {
                     image={item.imageUrl}
                     tags={item.tags}
                   />
-                  <Link to={`/group/${item.id}`}>
-                    <Button variant="contained" color="primary">
-                      Show details
-                    </Button>
-                  </Link>
+                  <Grid item className={classes.margin}>
+                    <Link to={`/group/${item.id}`}>
+                      <Button variant="contained" color="primary">
+                        Show details
+                      </Button>
+                    </Link>
+                  </Grid>
                 </Grid>
               );
             })
@@ -110,11 +113,13 @@ export default function MyGroup() {
                       image={item.imageUrl}
                       tags={item.tags}
                     />{" "}
-                    <Link to={`/group/${item.id}`}>
-                      <Button variant="contained" color="primary">
-                        Show details
-                      </Button>
-                    </Link>
+                    <Grid item className={classes.margin}>
+                      <Link to={`/group/${item.id}`}>
+                        <Button variant="contained" color="primary">
+                          Show details
+                        </Button>
+                      </Link>{" "}
+                    </Grid>
                   </Grid>
                 );
               })

@@ -24,22 +24,20 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import MailIcon from "@material-ui/icons/Mail";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
+
 // STYLING:
 const useStyles = makeStyles((theme) => ({
   footerContainer: { width: "100%" },
   footer: {
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[800],
+    backgroundColor: "rgb(110,107,198)",
   },
 }));
+
 function App() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -58,7 +56,6 @@ function App() {
 
   return (
     <div className="App">
-      <CssBaseline />
       <BrowserRouter>
         <Route
           path="/"

@@ -32,8 +32,7 @@ export default function CreateGroupForm() {
 
   function postGroup(event) {
     event.preventDefault();
-    console.log("description", description);
-    console.log("tags", tags);
+
     dispatch(createGroup(imageUrl, date, description, tags, groupSize));
   }
 

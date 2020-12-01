@@ -30,7 +30,6 @@ export default function MyProfile() {
       direction="column"
       justify="space-between"
       alignItems="center"
-      spacing={6}
     >
       {" "}
       <Grid item xs={12}>

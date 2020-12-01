@@ -55,19 +55,22 @@ export default function Home() {
     ],
     groupSize: [3, 4, 5],
   });
-
+  // const [activatedFilters, setActivatedFilters] = useState(false);
   const groupsWithSelectedTags = useSelector(selectGroupsWithFilters(filters));
 
-  const tags = filterTags.map((i) => i.name);
-  const existingGroupsSize = group.map((i) => i.maxUsers);
-
   const handleChange = (event) => {
+    const tags = filterTags.map((i) => i.name);
     let selectedTag = event.target.name;
-    const newList = tags.filter((i) => i == selectedTag);
+    console.log(selectedTag);
+    let newList = tags.filter((i) => {
+      return i.indexOf(selectedTag) !== -1;
+    });
     setFilters({ tags: newList, groupSize: filters.groupSize });
+    // setActivatedFilters(!activatedFilters);
   };
 
   const sizeFilter = (event) => {
+    const existingGroupsSize = group.map((i) => i.maxUsers);
     const selectedSize = event.target.value;
     const newList = existingGroupsSize.filter((i) => i >= selectedSize);
     setFilters({ groupSize: newList, tags: filters.tags });
@@ -78,20 +81,22 @@ export default function Home() {
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
     spacing: { marginTop: 10 },
+    margin: { marginTop: 10 },
   });
   const classes = useStyles();
 
   return (
     <div>
-      <Typography
-        variant="overline"
-        color="inherit"
-        className={classes.typography}
-      >
-        Browse groups
-      </Typography>
-
-      <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <Typography
+          variant="overline"
+          color="inherit"
+          className={classes.typography}
+        >
+          Browse groups
+        </Typography>
+      </Grid>
+      <Grid container className={classes.spacing}>
         <Grid item xs={2}>
           <Paper elevation={3}>
             <FormLabel>Tags</FormLabel>
@@ -128,7 +133,7 @@ export default function Home() {
           </Paper>
         </Grid>
         <Divider orientation="vertical" flexItem />
-        <Grid item xs={10} container spacing={8}>
+        <Grid item xs={10} container spacing={6} justify="center">
           {groupsWithSelectedTags.map((item) => {
             return (
               <Grid item>
@@ -141,26 +146,28 @@ export default function Home() {
                   maxSize={item.maxUsers}
                   tags={item.tags}
                 />
-
-                {user.id && !item.member.map((i) => i.id).includes(user.id) ? (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onJoinGroup(item.id)}
-                  >
-                    Join group
-                  </Button>
-                ) : item.member.map((i) => i.id).includes(user.id) ? (
-                  <Button variant="contained" disabled>
-                    You're already a member!
-                  </Button>
-                ) : (
-                  <Link to={`/login`}>
-                    <Button variant="contained" color="primary">
-                      Please login to join this group
-                    </Button>{" "}
-                  </Link>
-                )}
+                <Grid item className={classes.margin}>
+                  {user.id &&
+                  !item.member.map((i) => i.id).includes(user.id) ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onJoinGroup(item.id)}
+                    >
+                      Join group
+                    </Button>
+                  ) : item.member.map((i) => i.id).includes(user.id) ? (
+                    <Button variant="contained" disabled>
+                      You're already a member!
+                    </Button>
+                  ) : (
+                    <Link to={`/login`}>
+                      <Button variant="contained" color="primary">
+                        Please login to join this group
+                      </Button>{" "}
+                    </Link>
+                  )}
+                </Grid>
               </Grid>
             );
           })}

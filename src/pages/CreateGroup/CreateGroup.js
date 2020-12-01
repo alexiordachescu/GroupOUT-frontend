@@ -27,7 +27,6 @@ export default function CreateGroup() {
       direction="column"
       justify="space-between"
       alignItems="center"
-      spacing={6}
     >
       <Grid item xs={12}>
         <Typography variant="overline" className={classes.typography}>
