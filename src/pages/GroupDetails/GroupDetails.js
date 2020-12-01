@@ -62,10 +62,11 @@ export default function GroupDetails() {
       marginTop: "auto",
       marginLeft: "auto",
       marginRight: "auto",
-      marginBottom: 100,
+      marginBottom: 50,
     },
+    descriptionText: { fontSize: "2rem" },
     textBox: { width: "60%" },
-    comments: { marginTop: 3 },
+    comments: { marginTop: 3, fontSize: "1.2rem" },
     image: {
       width: "100%",
       backgroundSize: "contain",
@@ -101,7 +102,9 @@ export default function GroupDetails() {
               Group description
             </Typography>
           </Grid>
-          {groupDetails.description}
+          <Grid item className={classes.descriptionText}>
+            {groupDetails.description}
+          </Grid>
         </Grid>{" "}
       </Paper>
       <Paper elevation={3} className={classes.root}>
@@ -171,15 +174,17 @@ export default function GroupDetails() {
               className={classes.textBox}
               onChange={(e) => setComment(e.target.value)}
             />
+          </Grid>{" "}
+          <Grid item xs={12}>
+            <Button
+              color="primary"
+              variant="contained"
+              endIcon={<SendIcon />}
+              onClick={addComment}
+            >
+              Add comment!
+            </Button>
           </Grid>
-          <Button
-            color="primary"
-            variant="contained"
-            endIcon={<SendIcon />}
-            onClick={addComment}
-          >
-            Add comment!
-          </Button>
         </Grid>{" "}
       </Paper>
     </Grid>

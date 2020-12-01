@@ -16,7 +16,7 @@ export default function ChangeProfile() {
   const [lastName, setLastName] = useState(profile.lastName);
   const [description, setDescription] = useState(profile.description);
   const [email, setEmail] = useState(profile.email);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(profile.imageUrl);
 
   function saveChanges(event) {
     event.preventDefault();
