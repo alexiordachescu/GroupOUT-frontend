@@ -22,8 +22,26 @@ import AddIcon from "@material-ui/icons/Add";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MailIcon from "@material-ui/icons/Mail";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import IconButton from "@material-ui/core/IconButton";
+import Grid from "@material-ui/core/Grid";
+// STYLING:
+const useStyles = makeStyles((theme) => ({
+  footerContainer: { width: "100%" },
+  footer: {
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[200]
+        : theme.palette.grey[800],
+  },
+}));
 function App() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(bootstrapLogin());
@@ -37,8 +55,10 @@ function App() {
     "/login",
   ];
   const { token } = useSelector(selectUser);
+
   return (
     <div className="App">
+      <CssBaseline />
       <BrowserRouter>
         <Route
           path="/"
@@ -117,6 +137,47 @@ function App() {
           <Route path="/explore" component={Home} />
         </Switch>
       </BrowserRouter>
+      <footer className={classes.footer}>
+        <Grid container direction="row" className={classes.footerContainer}>
+          <Grid item xs={2} container justify="center" alignItems="center">
+            <Typography variant="overline" color="inherit">
+              Alex Iordachescu, 2020
+            </Typography>
+          </Grid>
+          <Grid item xs={10} container justify="flex-end">
+            <IconButton>
+              <LinkedInIcon
+                fontSize="medium"
+                onClick={(event) =>
+                  window.open(
+                    "https://www.linkedin.com/in/alexandru-ionut-iordachescu/",
+                    "_blank"
+                  )
+                }
+              />
+            </IconButton>
+            <IconButton>
+              <MailIcon
+                fontSize="medium"
+                onClick={(event) =>
+                  window.open(
+                    "mailto:alex.iordachescu27@gmail.com?cc=&subject=Hello Alex&body=",
+                    "_self"
+                  )
+                }
+              />
+            </IconButton>
+            <IconButton>
+              <GitHubIcon
+                fontSize="medium"
+                onClick={(event) =>
+                  window.open("https://github.com/alexiordachescu/", "_blank")
+                }
+              />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </footer>
     </div>
   );
 }
