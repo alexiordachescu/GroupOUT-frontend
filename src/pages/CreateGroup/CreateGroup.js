@@ -4,8 +4,17 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
+import { selectUser } from "../../store/user/selectors";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function CreateGroup() {
+  const history = useHistory();
+  const { token } = useSelector(selectUser);
+  if (token === null) {
+    history.push("/explore");
+  }
+
   // STYLING:
   const useStyles = makeStyles({
     typography: { fontSize: 25 },

@@ -16,7 +16,7 @@ export default function MyProfile() {
   const { token } = useSelector(selectUser);
   const history = useHistory();
   if (token === null) {
-    history.push("/");
+    history.push("/explore");
   }
 
   const useStyles = makeStyles({
