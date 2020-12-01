@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { selectUser } from "../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { changeProfile } from "../store/user/actions";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
 export default function ChangeProfile() {
   const profile = useSelector(selectUser);
@@ -35,56 +41,86 @@ export default function ChangeProfile() {
     setImageUrl(file.secure_url);
   };
 
+  // STYLING:
+  const useStyles = makeStyles({
+    input: { display: "none" },
+    root: { maxWidth: 800, marginTop: "1.5rem" },
+  });
+  const classes = useStyles();
+
   return (
     <div>
-      Edit profile
-      <form id="userform">
-        <div>
-          <label>
-            Change profile picture:
-            <input type="file" name="file" onChange={uploadImage} />
-          </label>
-        </div>
-        <label>
-          First Name:
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          ></input>
-        </label>
-        <div>
-          <label>
-            Last Name:
+      <form>
+        {" "}
+        <Grid container spacing={2} className={classes.root}>
+          <Grid item xs={12}>
+            <Typography variant="overline">Change profile picture:</Typography>{" "}
             <input
-              type="text"
+              className={classes.input}
+              type="file"
+              name="file"
+              id="contained-button-file"
+              onChange={uploadImage}
+            />
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                color="primary"
+                component="span"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload
+              </Button>
+            </label>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="First name"
+              fullWidth
+              required
+              variant="outlined"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Last name"
+              fullWidth
+              required
+              variant="outlined"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <div>
-          <label>
-            Description:
-            <textarea
-              style={{ height: "200px" }}
-              form="userform"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="My description"
+              fullWidth
+              multiline
+              required
+              variant="outlined"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </label>
-        </div>
-        <div>
-          <label>
-            Email:{" "}
-            <input
-              type="text"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              label="My email address"
+              fullWidth
+              required
               value={email}
+              variant="outlined"
               onChange={(e) => setEmail(e.target.value)}
-            ></input>
-          </label>
-        </div>
-        <button onClick={saveChanges}>Save changes</button>
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button fullWidth variant="contained" onClick={saveChanges}>
+              Submit changes
+            </Button>
+          </Grid>
+        </Grid>{" "}
       </form>
     </div>
   );

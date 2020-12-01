@@ -127,7 +127,7 @@ export default function CreateGroupForm() {
               variant="outlined"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth required>
@@ -138,9 +138,6 @@ export default function CreateGroupForm() {
                 value={groupSize}
                 onChange={(e) => setGroupSize(e.target.value)}
               >
-                {/* <MenuItem value="">
-                  <em>None</em>{" "}
-                </MenuItem> */}
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
                 <MenuItem value={4}>4</MenuItem>
