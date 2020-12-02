@@ -91,15 +91,6 @@ export default function Home() {
     }
     return 0;
   };
-  const sortByDate = (a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    }
-    if (a.date > b.date) {
-      return -1;
-    }
-    return 0;
-  };
   const sortBySizeDesc = (a, b) => {
     if (a.maxUsers < b.maxUsers) {
       return 1;
@@ -109,6 +100,16 @@ export default function Home() {
     }
     return 0;
   };
+  const sortByDate = (a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    }
+    if (a.date > b.date) {
+      return -1;
+    }
+    return 0;
+  };
+
   const sortByCreationDate = (a, b) => {
     if (a.createdAt < b.createdAt) {
       return 1;
@@ -192,19 +193,21 @@ export default function Home() {
             container
             direction="row"
             justify="flex-start"
-            alignItems="center"
+            alignItems="flex-start"
             xs={12}
           >
             {" "}
             <Paper>
               <FormControl className={classes.sortBy}>
-                <InputLabel id="demo-simple-select-label">Sort by:</InputLabel>
+                <InputLabel shrink>Sort by:</InputLabel>
                 <Select
-                  labelId="demo-simple-select-label"
                   value={sortedField}
+                  displayEmpty
                   onChange={(event) => setSortedField(event.target.value)}
                 >
-                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
                   <MenuItem value="Created">Recently added</MenuItem>
                   <MenuItem value="Date">OUTgoing date</MenuItem>
                   <MenuItem value="SizeASC">Group size (Asc)</MenuItem>
