@@ -1,13 +1,9 @@
-import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
-import {
-  selectGroups,
-  selectGroupsWithFilters,
-} from "../../store/group/selectors";
+import { selectGroupsWithFilters } from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -29,7 +25,6 @@ import Paper from "@material-ui/core/Paper";
 import { fetchTags } from "../../store/tags/actions";
 
 export default function Home() {
-  // const group = useSelector(selectGroups);
   const user = useSelector(selectUser);
   const filterTags = useSelector(selectTags);
 
@@ -75,7 +70,7 @@ export default function Home() {
     } else {
       newList = [...filters.groupSize, selectedSize];
     }
-    console.log(newList);
+
     setFilters({
       ...filters,
       groupSize: newList,

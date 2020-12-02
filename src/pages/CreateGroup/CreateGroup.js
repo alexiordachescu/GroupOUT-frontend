@@ -18,7 +18,6 @@ export default function CreateGroup() {
     history.push("/explore");
   }
 
-  console.log(message);
   // STYLING:
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
