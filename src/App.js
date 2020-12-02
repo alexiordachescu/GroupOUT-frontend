@@ -135,7 +135,12 @@ function App() {
         </Switch>
       </BrowserRouter>
       <footer className={classes.footer}>
-        <Grid container direction="row" className={classes.footerContainer}>
+        <Grid
+          container
+          direction="row"
+          xs={12}
+          className={classes.footerContainer}
+        >
           <Grid item xs={2} container justify="center" alignItems="center">
             <Typography variant="overline" color="inherit">
               Alex Iordachescu, 2020
