@@ -30,20 +30,21 @@ export const signUp = (
   firstName,
   lastName,
   description,
-  imageUrl,
   email,
-  password
+  password,
+  imageUrl
 ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
+
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
         firstName,
         lastName,
         description,
-        imageUrl,
         email,
         password,
+        imageUrl,
       });
 
       dispatch(loginSuccess(response.data));
@@ -52,7 +53,7 @@ export const signUp = (
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.message);
-        dispatch(setMessage("danger", true, error.response.data.message));
+        dispatch(setMessage("signuperror", true, error.response.data.message));
       } else {
         console.log(error.message);
         dispatch(setMessage("danger", true, error.message));

@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import { selectMessage } from "../../store/appState/selectors";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
+  const message = useSelector(selectMessage);
 
   useEffect(() => {
     if (token !== null) {
@@ -87,6 +89,11 @@ export default function SignUp() {
           </Link>
         </Grid>
       </Grid>
+      {message && message.variant === "danger" ? (
+        <Typography variant="overline" color="secondary">
+          {message.text}
+        </Typography>
+      ) : null}
     </Grid>
   );
 }

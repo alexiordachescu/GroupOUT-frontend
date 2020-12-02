@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
+import { setMessage } from "../appState/actions";
 import { selectUser } from "../user/selectors";
 
 export const fetchGroups = () => {
@@ -29,6 +30,7 @@ export const joinGroup = (id) => {
 
     if (response.status === 201) {
       dispatch(joinSuccess(response.data.joined));
+      dispatch(setMessage("joined", true, response.data.message));
     }
   };
 };
