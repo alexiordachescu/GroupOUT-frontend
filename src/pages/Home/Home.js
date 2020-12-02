@@ -1,13 +1,9 @@
-import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
-import {
-  selectGroups,
-  selectGroupsWithFilters,
-} from "../../store/group/selectors";
+import { selectGroupsWithFilters } from "../../store/group/selectors";
 import { selectUser } from "../../store/user/selectors";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
@@ -17,16 +13,23 @@ import Divider from "@material-ui/core/Divider";
 import { selectTags } from "../../store/tags/selectors";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
-import { FormControlLabel } from "@material-ui/core";
+import {
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import Paper from "@material-ui/core/Paper";
 import { fetchTags } from "../../store/tags/actions";
 
 export default function Home() {
-  const group = useSelector(selectGroups);
   const user = useSelector(selectUser);
   const filterTags = useSelector(selectTags);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchGroups());
   }, [dispatch]);
@@ -37,7 +40,7 @@ export default function Home() {
   const onJoinGroup = (id) => {
     dispatch(joinGroup(id));
   };
-
+  const [sortedField, setSortedField] = useState("");
   const [filters, setFilters] = useState({
     tags: [],
     groupSize: [],
@@ -67,21 +70,69 @@ export default function Home() {
     } else {
       newList = [...filters.groupSize, selectedSize];
     }
-    console.log(newList);
+
     setFilters({
       ...filters,
       groupSize: newList,
     });
   };
 
-  // STYLING:
+  const sortBySizeAsc = (a, b) => {
+    if (a.maxUsers < b.maxUsers) {
+      return -1;
+    }
+    if (a.maxUsers > b.maxUsers) {
+      return 1;
+    }
+    return 0;
+  };
+  const sortBySizeDesc = (a, b) => {
+    if (a.maxUsers < b.maxUsers) {
+      return 1;
+    }
+    if (a.maxUsers > b.maxUsers) {
+      return -1;
+    }
+    return 0;
+  };
+  const sortByDate = (a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    }
+    if (a.date > b.date) {
+      return -1;
+    }
+    return 0;
+  };
 
+  const sortByCreationDate = (a, b) => {
+    if (a.createdAt < b.createdAt) {
+      return 1;
+    }
+    if (a.createdAt > b.createdAt) {
+      return -1;
+    }
+    return 0;
+  };
+
+  // STYLING:
   const useStyles = makeStyles({
     typography: { fontSize: 25 },
     spacing: { marginTop: 10 },
     margin: { marginTop: 10 },
+    sortBy: { minWidth: 150 },
   });
   const classes = useStyles();
+
+  if (sortedField === "SizeASC") {
+    groupsWithSelectedTags.sort(sortBySizeAsc);
+  } else if (sortedField === "Created") {
+    groupsWithSelectedTags.sort(sortByCreationDate);
+  } else if (sortedField === "SizeDESC") {
+    groupsWithSelectedTags.sort(sortBySizeDesc);
+  } else if (sortedField === "Date") {
+    groupsWithSelectedTags.sort(sortByDate);
+  }
 
   return (
     <div>
@@ -132,9 +183,38 @@ export default function Home() {
         </Grid>
         <Divider orientation="vertical" flexItem />
         <Grid item xs={10} container spacing={6} justify="center">
+          <Grid
+            item
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-start"
+            xs={12}
+          >
+            {" "}
+            <Paper>
+              <FormControl className={classes.sortBy}>
+                <InputLabel shrink>Sort by:</InputLabel>
+                <Select
+                  value={sortedField}
+                  displayEmpty
+                  onChange={(event) => setSortedField(event.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value="Created">Recently added</MenuItem>
+                  <MenuItem value="Date">OUTgoing date</MenuItem>
+                  <MenuItem value="SizeASC">Group size (Asc)</MenuItem>
+                  <MenuItem value="SizeDESC">Group size (Desc)</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+          </Grid>
           {groupsWithSelectedTags.map((item) => {
             return (
               <Grid item>
+                {" "}
                 <Group
                   key={item.id}
                   image={item.imageUrl}

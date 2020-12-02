@@ -27,8 +27,9 @@ export const postComment = (comment) => {
       { comment },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-
-    dispatch(addCommentSuccess(response.data.newGroup));
+    if (response.status === 201) {
+      dispatch(addCommentSuccess(response.data.newGroup));
+    }
   };
 };
 
@@ -44,8 +45,9 @@ export const deleteUser = (id, groupId) => {
       headers: { Authorization: `Bearer ${token}` },
       data: { groupId },
     });
-
-    dispatch(deleteUserSuccess(response.data.updatedGroup));
+    if (response.status === 201) {
+      dispatch(deleteUserSuccess(response.data.updatedGroup));
+    }
   };
 };
 

@@ -34,8 +34,12 @@ import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles((theme) => ({
   footerContainer: { width: "100%" },
   footer: {
-    backgroundColor: "rgb(110,107,198)",
+    backgroundColor: "#f50057",
+    height: "3%",
   },
+  headerTypography: { fontSize: "1rem" },
+  typography: { color: "white" },
+  footerIcons: { color: "white" },
 }));
 
 function App() {
@@ -61,65 +65,83 @@ function App() {
           path="/"
           render={(history) => (
             <AppBar position="static" color="secondary">
-              <Tabs
-                centered="true"
-                value={
-                  history.location.pathname !== "/"
-                    ? history.location.pathname
-                    : false
-                }
-              >
-                <Tab
-                  label="Explore Groups"
-                  value={routes[0]}
-                  component={Link}
-                  to={routes[0]}
-                  icon={<ExploreIcon fontSize="small" />}
-                />
-                {token ? (
-                  <div>
-                    <Tab
-                      label="My Groups"
-                      value={routes[1]}
-                      component={Link}
-                      to={routes[1]}
-                      icon={<GroupIcon fontSize="small" />}
-                    />
-                    <Tab
-                      label="Create Group"
-                      value={routes[2]}
-                      component={Link}
-                      to={routes[2]}
-                      icon={<AddIcon fontSize="small" />}
-                    />
-                    <Tab
-                      label="My Profile"
-                      value={routes[3]}
-                      component={Link}
-                      to={routes[3]}
-                      icon={<AssignmentIndIcon fontSize="small" />}
-                    />
-                  </div>
-                ) : null}
-
-                {!token ? (
-                  <Tab
-                    label="Login"
-                    value={routes[4]}
-                    component={Link}
-                    to={routes[4]}
-                    icon={<LockOpenIcon fontSize="small" />}
-                  />
-                ) : (
-                  <Button
-                    variant="contained"
-                    onClick={() => dispatch(logOut())}
-                    endIcon={<MeetingRoomIcon />}
+              <Grid container justify={"space-between"}>
+                <Grid
+                  item
+                  container
+                  direction={"row"}
+                  sm={12}
+                  lg={2}
+                  alignItems={"center"}
+                  justify={"center"}
+                >
+                  <Typography
+                    variant="overline"
+                    className={classes.headerTypography}
                   >
-                    Logout
-                  </Button>
-                )}
-              </Tabs>
+                    Group OUT
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Tabs
+                    value={
+                      history.location.pathname !== "/"
+                        ? history.location.pathname
+                        : false
+                    }
+                  >
+                    <Tab
+                      label="Explore Groups"
+                      value={routes[0]}
+                      component={Link}
+                      to={routes[0]}
+                      icon={<ExploreIcon fontSize="small" />}
+                    />
+                    {token ? (
+                      <div>
+                        <Tab
+                          label="My Groups"
+                          value={routes[1]}
+                          component={Link}
+                          to={routes[1]}
+                          icon={<GroupIcon fontSize="small" />}
+                        />
+                        <Tab
+                          label="Create Group"
+                          value={routes[2]}
+                          component={Link}
+                          to={routes[2]}
+                          icon={<AddIcon fontSize="small" />}
+                        />
+                        <Tab
+                          label="My Profile"
+                          value={routes[3]}
+                          component={Link}
+                          to={routes[3]}
+                          icon={<AssignmentIndIcon fontSize="small" />}
+                        />
+                      </div>
+                    ) : null}
+                    {!token ? (
+                      <Tab
+                        label="Login"
+                        value={routes[4]}
+                        component={Link}
+                        to={routes[4]}
+                        icon={<LockOpenIcon fontSize="small" />}
+                      />
+                    ) : (
+                      <Button
+                        variant="contained"
+                        onClick={() => dispatch(logOut())}
+                        endIcon={<MeetingRoomIcon />}
+                      >
+                        Logout
+                      </Button>
+                    )}
+                  </Tabs>
+                </Grid>
+              </Grid>
             </AppBar>
           )}
         />
@@ -135,16 +157,22 @@ function App() {
         </Switch>
       </BrowserRouter>
       <footer className={classes.footer}>
-        <Grid container direction="row" className={classes.footerContainer}>
+        <Grid
+          container
+          direction="row"
+          xs={12}
+          className={classes.footerContainer}
+        >
           <Grid item xs={2} container justify="center" alignItems="center">
-            <Typography variant="overline" color="inherit">
+            <Typography variant="overline" className={classes.typography}>
               Alex Iordachescu, 2020
             </Typography>
           </Grid>
           <Grid item xs={10} container justify="flex-end">
             <IconButton>
               <LinkedInIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open(
                     "https://www.linkedin.com/in/alexandru-ionut-iordachescu/",
@@ -155,7 +183,8 @@ function App() {
             </IconButton>
             <IconButton>
               <MailIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open(
                     "mailto:alex.iordachescu27@gmail.com?cc=&subject=Hello Alex&body=",
@@ -166,7 +195,8 @@ function App() {
             </IconButton>
             <IconButton>
               <GitHubIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open("https://github.com/alexiordachescu/", "_blank")
                 }

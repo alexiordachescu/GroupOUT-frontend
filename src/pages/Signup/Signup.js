@@ -31,10 +31,7 @@ export default function SignUp() {
 
   function submitForm(event) {
     event.preventDefault();
-    console.log("firstname:", firstName);
-    console.log("lastName", lastName);
-    console.log("descripion", description);
-    console.log("image", imageUrl);
+
     dispatch(
       signUp(firstName, lastName, description, email, password, imageUrl)
     );

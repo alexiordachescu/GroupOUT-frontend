@@ -17,6 +17,8 @@ export default (state = initialState, action) => {
           return group;
         }),
       };
+    case "CREATE-GROUP-SUCCESS":
+      return { ...state, message: action.payload };
 
     default:
       return state;

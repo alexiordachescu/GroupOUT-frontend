@@ -50,11 +50,11 @@ export default function GroupDetails() {
 
   const useStyles = makeStyles({
     root: {
-      backgroundColor: "rgba(97,196,176)",
+      backgroundColor: "rgb(197,196,233)",
       marginTop: 10,
     },
     spacing: {
-      marginBottom: 15,
+      marginBottom: 0,
     },
     mainContainer: {
       width: "50%",
@@ -64,7 +64,7 @@ export default function GroupDetails() {
       marginRight: "auto",
       marginBottom: 50,
     },
-    descriptionText: { fontSize: "2rem" },
+    elementHeader: { fontSize: "1rem" },
     textBox: { width: "60%" },
     comments: { marginTop: 3, fontSize: "1.2rem" },
     image: {
@@ -83,7 +83,11 @@ export default function GroupDetails() {
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="row" justify="space-evenly">
           <Grid item xs={12} className={classes.spacing}>
-            <Typography variant="overline" color="inherit">
+            <Typography
+              variant="overline"
+              color="inherit"
+              className={classes.elementHeader}
+            >
               Group details:
             </Typography>
           </Grid>
@@ -98,19 +102,33 @@ export default function GroupDetails() {
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="row" justify="space-evenly">
           <Grid item xs={12} className={classes.spacing}>
-            <Typography variant="overline" color="inherit">
+            <Typography
+              variant="overline"
+              color="inherit"
+              className={classes.elementHeader}
+            >
               Group description
             </Typography>
           </Grid>
-          <Grid item className={classes.descriptionText}>
-            {groupDetails.description}
+          <Grid item>
+            <Typography
+              variant="overline"
+              color="inherit"
+              style={{ fontWeight: "bold" }}
+            >
+              {groupDetails.description}
+            </Typography>
           </Grid>
         </Grid>{" "}
       </Paper>
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="row" justify="space-evenly">
           <Grid item xs={12} className={classes.spacing}>
-            <Typography variant="overline" color="inherit">
+            <Typography
+              variant="overline"
+              color="inherit"
+              className={classes.elementHeader}
+            >
               Member list
             </Typography>
           </Grid>
@@ -143,7 +161,11 @@ export default function GroupDetails() {
       <Paper elevation={3} className={classes.root}>
         <Grid container direction="row" justify="space-evenly">
           <Grid item xs={12} className={classes.spacing}>
-            <Typography variant="overline" color="inherit">
+            <Typography
+              variant="overline"
+              color="inherit"
+              className={classes.elementHeader}
+            >
               Discussion:
             </Typography>{" "}
           </Grid>

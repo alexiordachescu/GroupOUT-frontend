@@ -50,7 +50,9 @@ export const createGroup = (imageUrl, date, description, tags, groupSize) => {
         },
       }
     );
-    console.log(response);
+    if (response.status === 200) {
+      dispatch(createGroupSuccess(response.data.message));
+    }
   };
 };
 export const createGroupSuccess = (response) => ({

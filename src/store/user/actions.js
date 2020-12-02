@@ -148,8 +148,9 @@ export const changeProfile = (
         },
       }
     );
-
-    dispatch(changeProfileSuccess(response.data.user));
+    if (response.status === 200) {
+      dispatch(changeProfileSuccess(response.data.user));
+    }
   };
 };
 export const changeProfileSuccess = (response) => ({

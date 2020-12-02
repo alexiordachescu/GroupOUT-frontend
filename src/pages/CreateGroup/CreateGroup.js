@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CreateGroupForm from "../../components/CreateGroupForm";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -7,10 +7,13 @@ import Divider from "@material-ui/core/Divider";
 import { selectUser } from "../../store/user/selectors";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { selectCreateGroupMessage } from "../../store/group/selectors";
 
 export default function CreateGroup() {
   const history = useHistory();
   const { token } = useSelector(selectUser);
+  const message = useSelector(selectCreateGroupMessage);
+  console.log(message);
   if (token === null) {
     history.push("/explore");
   }
@@ -36,6 +39,13 @@ export default function CreateGroup() {
       </Grid>
       <Grid item xs={12}>
         <CreateGroupForm />
+      </Grid>
+      <Grid item xs={12}>
+        {message ? (
+          <Typography variant="overline">
+            Hooray, your new group is now waiting for new members!
+          </Typography>
+        ) : null}
       </Grid>
     </Grid>
   );
