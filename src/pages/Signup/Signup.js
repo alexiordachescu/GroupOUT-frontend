@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import { selectMessage } from "../../store/appState/selectors";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -22,6 +23,7 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
+  const message = useSelector(selectMessage);
 
   useEffect(() => {
     if (token !== null) {
@@ -35,7 +37,6 @@ export default function SignUp() {
     dispatch(
       signUp(firstName, lastName, description, email, password, imageUrl)
     );
-
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -144,7 +145,7 @@ export default function SignUp() {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="overline">
-            Choose a representative photo of yourself
+            Choose a representative photo of yourself*
           </Typography>
           <input
             type="file"
@@ -178,6 +179,11 @@ export default function SignUp() {
           <Link to="/login">Click here to log in</Link>
         </Grid>
       </Grid>
+      {message && message.variant === "signuperror" ? (
+        <Typography variant="overline" color="secondary">
+          {message.text}
+        </Typography>
+      ) : null}
     </Grid>
   );
 }
