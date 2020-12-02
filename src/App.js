@@ -34,8 +34,11 @@ import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles((theme) => ({
   footerContainer: { width: "100%" },
   footer: {
-    backgroundColor: "rgb(110,107,198)",
+    backgroundColor: "#f50057",
+    height: "2.1rem",
   },
+  typography: { color: "white" },
+  footerIcons: { color: "white" },
 }));
 
 function App() {
@@ -142,14 +145,15 @@ function App() {
           className={classes.footerContainer}
         >
           <Grid item xs={2} container justify="center" alignItems="center">
-            <Typography variant="overline" color="inherit">
+            <Typography variant="overline" className={classes.typography}>
               Alex Iordachescu, 2020
             </Typography>
           </Grid>
           <Grid item xs={10} container justify="flex-end">
             <IconButton>
               <LinkedInIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open(
                     "https://www.linkedin.com/in/alexandru-ionut-iordachescu/",
@@ -160,7 +164,8 @@ function App() {
             </IconButton>
             <IconButton>
               <MailIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open(
                     "mailto:alex.iordachescu27@gmail.com?cc=&subject=Hello Alex&body=",
@@ -171,7 +176,8 @@ function App() {
             </IconButton>
             <IconButton>
               <GitHubIcon
-                fontSize="medium"
+                className={classes.footerIcons}
+                fontSize="small"
                 onClick={(event) =>
                   window.open("https://github.com/alexiordachescu/", "_blank")
                 }
