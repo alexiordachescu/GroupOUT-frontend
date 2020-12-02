@@ -9,7 +9,7 @@ import MyProfile from "./pages/MyProfile/MyProfile";
 import CreateGroup from "./pages/CreateGroup/CreateGroup";
 import { bootstrapLogin, logOut } from "./store/user/actions";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import AppBar from "@material-ui/core/AppBar";
@@ -169,38 +169,32 @@ function App() {
             </Typography>
           </Grid>
           <Grid item xs={10} container justify="flex-end">
-            <IconButton>
-              <LinkedInIcon
-                className={classes.footerIcons}
-                fontSize="small"
-                onClick={(event) =>
-                  window.open(
-                    "https://www.linkedin.com/in/alexandru-ionut-iordachescu/",
-                    "_blank"
-                  )
-                }
-              />
+            <IconButton
+              onClick={(event) =>
+                window.open(
+                  "https://www.linkedin.com/in/alexandru-ionut-iordachescu/",
+                  "_blank"
+                )
+              }
+            >
+              <LinkedInIcon className={classes.footerIcons} fontSize="small" />
             </IconButton>
-            <IconButton>
-              <MailIcon
-                className={classes.footerIcons}
-                fontSize="small"
-                onClick={(event) =>
-                  window.open(
-                    "mailto:alex.iordachescu27@gmail.com?cc=&subject=Hello Alex&body=",
-                    "_self"
-                  )
-                }
-              />
+            <IconButton
+              onClick={(event) =>
+                window.open(
+                  "mailto:alex.iordachescu27@gmail.com?cc=&subject=Hello Alex&body=",
+                  "_self"
+                )
+              }
+            >
+              <MailIcon className={classes.footerIcons} fontSize="small" />
             </IconButton>
-            <IconButton>
-              <GitHubIcon
-                className={classes.footerIcons}
-                fontSize="small"
-                onClick={(event) =>
-                  window.open("https://github.com/alexiordachescu/", "_blank")
-                }
-              />
+            <IconButton
+              onClick={(event) =>
+                window.open("https://github.com/alexiordachescu/", "_blank")
+              }
+            >
+              <GitHubIcon className={classes.footerIcons} fontSize="small" />
             </IconButton>
           </Grid>
         </Grid>

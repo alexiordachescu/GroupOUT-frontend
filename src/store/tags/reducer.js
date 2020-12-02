@@ -1,6 +1,6 @@
 const initialState = { tagList: [] };
 
-export default (state = initialState, action) => {
+export default function tagsReducer(state = initialState, action) {
   switch (action.type) {
     case "TAGS_FETCH_SUCCESS":
       return { tagList: action.payload };
@@ -8,4 +8,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

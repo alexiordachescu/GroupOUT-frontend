@@ -29,7 +29,7 @@ export default function GroupDetails() {
   const [comment, setComment] = useState("");
   useEffect(() => {
     dispatch(fetchGroupDetails(params.id));
-  }, [dispatch]);
+  }, [dispatch]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { token } = useSelector(selectUser);
   const groupDetails = useSelector(selectGroupDetails);

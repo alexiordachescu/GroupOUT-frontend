@@ -3,7 +3,7 @@ const initialState = {
   memberGroups: [],
 };
 
-export default (state = initialState, action) => {
+export default function userGroupsReducer(state = initialState, action) {
   switch (action.type) {
     case "FETCH-ADMIN-SUCCESS":
       return { adminGroups: action.payload };
@@ -12,4 +12,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

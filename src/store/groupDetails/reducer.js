@@ -1,8 +1,6 @@
-import { bindActionCreators } from "redux";
-
 const initialState = { groupInfo: [], groupComm: [] };
 
-export default (state = initialState, action) => {
+export default function groupDetailsReducer(state = initialState, action) {
   switch (action.type) {
     case "FETCH-DETAILS-SUCCESS":
       return { groupInfo: action.payload };
@@ -13,4 +11,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CreateGroupForm from "../../components/CreateGroupForm";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";

@@ -2,7 +2,7 @@ const initialState = {
   groups: [],
 };
 
-export default (state = initialState, action) => {
+export default function groupsReducer(state = initialState, action) {
   switch (action.type) {
     case "GROUPS_FETCH_SUCCESS":
       return { groups: action.payload };
@@ -23,4 +23,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}
