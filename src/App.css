@@ -8,6 +8,7 @@ body,
 .App {
   min-height: 100vh;
   max-width: 100%;
+  margin-bottom: 0.8%;
 }
 footer {
   position: fixed;

@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   footerContainer: { width: "100%" },
   footer: {
     backgroundColor: "#f50057",
-    height: "2.1rem",
+    height: "3%",
   },
   typography: { color: "white" },
   footerIcons: { color: "white" },
