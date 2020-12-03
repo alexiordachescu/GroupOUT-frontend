@@ -11,7 +11,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Project Board  
 
-The project board can be found <a href=https://github.com/users/alexiordachescu/projects/1">here</a>. 
+The project board can be found <a href="https://github.com/users/alexiordachescu/projects/1">here</a>. 
 
 # Wireframe  
 
