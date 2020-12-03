@@ -1,7 +1,13 @@
-# GroupOUT - An online social platform for friends 👥
+# GroupOUT - An online social platform for friends 👥 
 
+Dear visitor, first of all thanks for taking the time to check out my project. My name is Alex and I'm a newbie but motivated developer and this is my portfolio project. The next (sub-)chapters will dive you into my 2 weeks progress. 
 
-### `What is GroupOUT ?`
+### `What is GroupOUT ?` 🧑🏿‍🤝‍🧑 
+
+GroupOUT is an application for people or groups of people interested in socializing and creating new friends. The main purpose of this web application is to stimulate real-life encounters between groups of people. Whenever one feels lonely, bored or his / her friends unexpectedly cancel a meeting, they can check out the "Explore groups" page of this app. Or even better, they can use the "Create group" feature to make sure their initial well established schedule goes as planned. 
+
+<p> <img src="https://github.com/alexiordachescu/GroupOUT-frontend/blob/development/App-screenshot.jpg" /> </p> 
+<p> <img src="https://github.com/alexiordachescu/GroupOUT-frontend/blob/development/Group-screenshot.png" /> </p>
  
 ### `Project goals` 🎯
 
