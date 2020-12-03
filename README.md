@@ -51,7 +51,7 @@ Go to <a href="https://dbdiagram.io/d/5fbab34e3a78976d7b7cf00b">the database mod
 
 # Backend repository 💾
 
-Go to <a href="hhttps://github.com/alexiordachescu/GroupOUT-backend">the backend repository</a>.
+Go to <a href="https://github.com/alexiordachescu/GroupOUT-backend">the backend repository</a>.
 
 
 
