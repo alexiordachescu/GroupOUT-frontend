@@ -32,7 +32,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(fetchGroups());
-  }, [push]);
+  }, [push]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     dispatch(fetchGroups());
   }, [dispatch]);
