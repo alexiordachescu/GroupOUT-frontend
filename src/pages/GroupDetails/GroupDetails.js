@@ -44,12 +44,14 @@ export default function GroupDetails() {
   };
 
   if (token === null) {
-    history.push("/");
+    history.push("/explore");
   }
 
   const leaveGroup = (id, groupId) => {
     dispatch(leaveChosenGroup(id, groupId));
+    history.push("/explore");
   };
+
   /////// STYLING:
 
   const useStyles = makeStyles({

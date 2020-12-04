@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Group from "../../components/Group";
 import { fetchGroups, joinGroup } from "../../store/group/actions";
 import { selectGroupsWithFilters } from "../../store/group/selectors";
@@ -27,9 +27,12 @@ import { fetchTags } from "../../store/tags/actions";
 export default function Home() {
   const user = useSelector(selectUser);
   const filterTags = useSelector(selectTags);
-
+  const { push } = useHistory();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchGroups());
+  }, [push]);
   useEffect(() => {
     dispatch(fetchGroups());
   }, [dispatch]);
