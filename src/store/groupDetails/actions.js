@@ -51,6 +51,20 @@ export const deleteUser = (id, groupId) => {
   };
 };
 
+export const leaveChosenGroup = (id, groupId) => {
+  return async (dispatch, getState) => {
+    const { token } = selectUser(getState());
+    const response = await Axios.delete(`${apiUrl}/groups/user/${id}/leave`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { groupId },
+    });
+    console.log(response);
+    if (response.status === 201) {
+      dispatch(deleteUserSuccess(response.data.updatedGroup));
+    }
+  };
+};
+
 export const deleteUserSuccess = (response) => ({
   type: "DELETE-USER-SUCCESS",
   payload: response,

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUser,
   fetchGroupDetails,
+  leaveChosenGroup,
   postComment,
 } from "../../store/groupDetails/actions";
 import { selectGroupDetails } from "../../store/groupDetails/selectors";
@@ -46,6 +47,9 @@ export default function GroupDetails() {
     history.push("/");
   }
 
+  const leaveGroup = (id, groupId) => {
+    dispatch(leaveChosenGroup(id, groupId));
+  };
   /////// STYLING:
 
   const useStyles = makeStyles({
@@ -91,6 +95,14 @@ export default function GroupDetails() {
               Group details:
             </Typography>
           </Grid>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => leaveGroup(user.id, groupDetails.id)}
+          >
+            Leave group!
+          </Button>
+
           <Grid item xs={12} container justify="center">
             <CardMedia
               image={groupDetails.imageUrl}
