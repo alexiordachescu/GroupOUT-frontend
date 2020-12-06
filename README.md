@@ -4,8 +4,12 @@ Dear visitor, first of all thanks for taking the time to check out my project. M
 
 ### `What is GroupOUT ?` 🧑🏿‍🤝‍🧑 
 
-GroupOUT is an application for people or groups of people interested in socializing and making new friends. The main purpose of this web application is to stimulate real-life encounters between groups of people. Whenever one feels lonely, bored or his / her friends unexpectedly cancel a meeting, they can check out the "Explore groups" page of this app. Or even better, they can use the "Create group" feature to make sure their initial well established schedule goes as planned. 
+GroupOUT is an application for people or groups of people interested in socializing and making new friends. The main purpose of this web application is to stimulate real-life encounters between groups of people. Whenever one feels lonely, bored or his / her friends unexpectedly cancel a meeting, they can check out the "Explore groups" page of this app. Or even better, they can use the "Create group" feature to make sure their initial well established schedule goes as planned.  
 
+Check out Joey's story in this Group OUT video presentation: (click on the picture below to play👇)
+[![Watch the video](https://github.com/alexiordachescu/GroupOUT-frontend/blob/development/App-screenshot.jpg)](https://www.youtube.com/watch?v=mWuy81bWdlY)
+
+Group OUT screenshots:
 <p> <img src="https://github.com/alexiordachescu/GroupOUT-frontend/blob/development/App-screenshot.jpg" /> </p> 
 <p> <img src="https://github.com/alexiordachescu/GroupOUT-frontend/blob/development/Group-screenshot.png" /> </p>
  
