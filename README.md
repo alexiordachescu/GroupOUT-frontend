@@ -32,7 +32,8 @@ The purpose of building this project in less than 2 weeks was a dual one. On one
 - Material-UI 
 - NodeJS 
 - Express 
-- REST APIs 
+- REST APIs  
+- PostgreSQL
 - Sequelize ORM 
 - Database relationships: one-to-many & many-to-many 
 
